@@ -2,6 +2,8 @@
 
 每张图单独生成，根据内容替换变量。
 
+**两种模式**：先确定用户要 Rich 还是 Simple，再选对应模板。未指定默认 Simple。
+
 ---
 
 ## 比例参数速查
@@ -29,19 +31,66 @@ chibi character named YC, messy dark-red burgundy fluffy hair, round clear-frame
 
 ---
 
-## 主模板
+## ✦ Simple 模式模板（默认）
+
+极简图说：一张图 = 一个画面 + 一个核心隐喻。让图本身说故事，文字只是点睛。
 
 ```text
-Generate one standalone {比例} YC personal brand illustration.
+Generate one standalone {比例} YC illustration in SIMPLE minimal style.
 
 Visual DNA:
-Warm off-white / cream background (not pure white). Warm editorial hand-drawn illustration style. Mix of detailed chibi character art with hand-written and printed text labels. Cozy, personal, creative energy. No pure white background, no commercial poster style, no PPT infographic.
+Warm off-white / cream background. Clean, minimal, hand-drawn illustration. ONE clear scene with generous white space. Very few text labels — the image tells the story, not the words. Cozy and personal but NOT information-dense. No multi-panel layouts, no section headers, no cards, no grids, no tables. Think: one beautiful sketch in a notebook page with tons of breathing room.
+
+IP Character (required):
+YC — chibi character with messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle face, chibi proportions (large head, small body, thin arms/legs), casual streetwear, small earring, silver chain necklace, white sneakers. YC performs ONE clear action that IS the core visual metaphor.
+
+Scene:
+{一个清晰的核心画面：YC 在做什么、核心视觉隐喻是什么}
+
+Signature props (pick 1-2 only):
+{根据场景选最核心的 1-2 个道具}
+
+Labels (MAXIMUM 2-4 short labels, each 2-6 characters):
+{极短标注1} / {极短标注2} / {可选极短标注3}
+
+Color:
+Black line art. One accent color only (orange for paths/flow, OR red for emphasis, OR blue for system/AI). Do not use all three.
+
+Constraints:
+MINIMAL TEXT — the image should be understandable even without reading any labels. YC must be the core action subject. At least 40% of the canvas should be empty white/cream space. No section headers, no title banners, no panels, no cards, no grids, no tables, no numbered lists. No multi-panel layout. ONE scene, ONE metaphor, ONE action. Should feel like a single thoughtful sketch, not an infographic page.
+```
+
+### Simple 模式的隐喻构思法
+
+和 Ian 小黑一样，每次从内容重新发明一个视觉隐喻：
+
+1. 把抽象概念换成一个物理动作：连接、攀爬、浇灌、拼图、开门、过桥、称重
+2. 把系统/结构换成一个低科技物件：黑板、梯子、天平、种子、桥、门、容器
+3. 让 YC 成为动作的执行者，不是旁观者
+
+**例子：三角函数 Simple 版**
+- YC 站在一个巨大的单位圆旁边，手指指向圆上的一个点
+- 只标注 3 个词：sin / cos / θ
+- 没有表格、没有多个 section、没有公式列表
+- 图本身就是"YC 在探索单位圆"的画面
+
+---
+
+## ✦ Rich 模式模板
+
+丰富 editorial：多面板、多 section、信息完整。适合 IP 介绍、品牌全景、知识体系。
+
+```text
+Generate one standalone {比例} YC personal brand illustration in RICH editorial style.
+
+Visual DNA:
+Warm off-white / cream background (not pure white). Warm editorial hand-drawn illustration style. Mix of detailed chibi character art with hand-written and printed text labels. Multiple content panels/sections with clear hierarchy. Cozy, personal, creative energy. No pure white background, no commercial poster style, no PPT infographic.
 
 IP Character (required):
 YC — chibi character with messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle face, chibi proportions (large head, small body, thin arms/legs), casual streetwear (denim jacket / black workwear / varsity jacket / cream jacket — pick based on scene), small earring, silver chain necklace, white sneakers.
 
 Layout type:
-{IP Character Sheet / Creative Workspace Panorama / Brand Ecosystem Map / Deep Work Journal / Process Transformation / Social Media Card}
+{IP Character Sheet / Creative Workspace Panorama / Brand Ecosystem Map / Deep Work Journal / Process Transformation / Knowledge Explainer}
 
 Scene:
 {具体场景：YC 在哪里、在做什么、周围有什么}
@@ -50,7 +99,7 @@ Signature props (include 2-4 based on scene):
 MacBook with small heart sticker ♥ / smiley face coffee mug ☺ / MIDI keyboard / over-ear headphones / spiral notebook / hardcover books stacked / pencil cup / small plant / backpack
 
 Content sections / panels:
-{如果是多面板布局，列出每个 section 的标题和内容}
+{列出每个 section 的标题和内容}
 
 Chinese + English labels:
 {标注1 中文/English} / {标注2} / {标注3} / {可选标注4}
