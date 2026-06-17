@@ -2,7 +2,7 @@
 
 每张图单独生成，根据内容替换变量。
 
-**两种模式**：先确定用户要 Rich 还是 Simple，再选对应模板。未指定默认 Simple。
+**三种模式**：先确定用户要 Rich / Simple / Minimal，再选对应模板。未指定默认 Simple。
 
 ---
 
@@ -31,48 +31,76 @@ chibi character named YC, messy dark-red burgundy fluffy hair, round clear-frame
 
 ---
 
-## ✦ Simple 模式模板（默认）
+## ✦ Minimal 极简模式
 
-极简图说：一张图 = 一个画面 + 一个核心隐喻。让图本身说故事，文字只是点睛。
+极致干净。纯白底 + YC + 一个核心隐喻 + 最多 2-5 个词。图本身就是全部内容。
 
 ```text
-Generate one standalone {比例} YC illustration in SIMPLE minimal style.
+Generate one standalone {比例} illustration in MINIMAL ultra-clean style.
 
 Visual DNA:
-Warm off-white / cream background. Clean, minimal, hand-drawn illustration. ONE clear scene with generous white space. Very few text labels — the image tells the story, not the words. Cozy and personal but NOT information-dense. No multi-panel layouts, no section headers, no cards, no grids, no tables. Think: one beautiful sketch in a notebook page with tons of breathing room.
+PURE WHITE background — no cream, no texture, no paper grain, no warmth tint. Black hand-drawn line art with slightly wobbly pen lines. Massive white space — at least 50% of canvas is completely empty. ONE visual metaphor, ONE flow, ONE action. The drawing itself explains the idea — text is almost unnecessary.
 
 IP Character (required):
-YC — chibi character with messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle face, chibi proportions (large head, small body, thin arms/legs), casual streetwear, small earring, silver chain necklace, white sneakers. YC performs ONE clear action that IS the core visual metaphor.
+YC — chibi character with messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, chibi proportions. Drawn in simple black line art style (not full-color detailed illustration). YC performs the ONE core action that IS the metaphor. YC should feel like a quick but expressive sketch, not a polished anime character.
 
 Scene:
-{一个清晰的核心画面：YC 在做什么、核心视觉隐喻是什么}
+{一个核心隐喻画面：YC 和什么物件在做什么动作}
 
-Signature props (pick 1-2 only):
-{根据场景选最核心的 1-2 个道具}
-
-Labels (MAXIMUM 2-4 short labels, each 2-6 characters):
-{极短标注1} / {极短标注2} / {可选极短标注3}
+Labels (STRICT MAXIMUM 2-5 short words, Chinese only):
+{极短词1} / {极短词2} / {可选词3}
 
 Color:
-Black line art. One accent color only (orange for paths/flow, OR red for emphasis, OR blue for system/AI). Do not use all three.
+Black line art for everything. ONLY ONE accent color — orange for directional arrows/flow, OR red for key emphasis. No blue. No pink. No hearts. No sparkles. No decorative elements.
 
 Constraints:
-MINIMAL TEXT — the image should be understandable even without reading any labels. YC must be the core action subject. At least 40% of the canvas should be empty white/cream space. No section headers, no title banners, no panels, no cards, no grids, no tables, no numbered lists. No multi-panel layout. ONE scene, ONE metaphor, ONE action. Should feel like a single thoughtful sketch, not an infographic page.
+PURE WHITE background — this is the #1 rule. No cream, no off-white. Drawing style is loose hand-sketch, NOT polished anime illustration. No section headers. No English text. No title banners. No panels. No frames. No tables. No numbered steps. No signature props (no MacBook, no smiley mug — unless they ARE the metaphor). No decorative hearts/stars/sparkles. The image should look like someone quickly sketched an idea on blank white paper to explain ONE thing. Maximum 2-5 Chinese words total on the entire image. If you remove ALL text, the image should still make complete sense.
 ```
 
-### Simple 模式的隐喻构思法
+### Minimal 模式的隐喻构思法
 
 每次从内容重新发明一个视觉隐喻：
 
-1. 把抽象概念换成一个物理动作：连接、攀爬、浇灌、拼图、开门、过桥、称重
-2. 把系统/结构换成一个低科技物件：黑板、梯子、天平、种子、桥、门、容器
-3. 让 YC 成为动作的执行者，不是旁观者
+1. 把抽象概念换成一个物理动作：搬运、卡住、漏掉、变重、过滤、连接、断开
+2. 把系统/结构换成一个低科技物件：传送带、纸箱、漏斗、秤、梯子、井、门、桥
+3. 让 YC 成为动作的执行者 — 拉、扛、塞、撑、推、接、拆
 
-**例子：三角函数 Simple 版**
-- YC 站在一个巨大的单位圆旁边，手指指向圆上的一个点
-- 只标注 3 个词：sin / cos / θ
-- 没有表格、没有多个 section、没有公式列表
-- 图本身就是"YC 在探索单位圆"的画面
+**例子：学习流程 Minimal 版**
+- 画面：YC 站在一条简单的传送带旁边，左边是散乱的纸片（输入），YC 在中间把纸片压进一个小盒子里（消化），右边盒子里整齐放着几本小册子（输出）
+- 只标注：「输入」→「消化」→「输出」
+- 纯白底，黑色线稿，橙色箭头表示方向
+- 没有步骤编号，没有装饰，没有 section
+
+---
+
+## ✦ Simple 普通模式（默认）
+
+多场景故事流：3-6 步串联讲清一个流程。有 YC 的温暖感，适中的文字量。
+
+```text
+Generate one standalone {比例} YC illustration in SIMPLE story-flow style.
+
+Visual DNA:
+Warm off-white / cream background. Hand-drawn illustration with multiple small scene panels showing a step-by-step flow or story. Each step has YC in a different action/state. Warm and personal but not information-overloaded. Connected by arrows or a visual flow path. Light decorative accents (small hearts, stars — sparingly).
+
+IP Character (required):
+YC — chibi character with messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle face, chibi proportions (large head, small body, thin arms/legs), casual streetwear, small earring, silver chain necklace, white sneakers. YC appears in each step doing a different action.
+
+Steps (3-6 steps):
+{步骤1：YC 在做什么} → {步骤2} → {步骤3} → ...
+
+Labels per step (1-2 short bilingual labels each):
+{步骤1标注 中文/English} / {步骤2标注} / ...
+
+Signature props (pick 2-3):
+{根据场景选签名道具}
+
+Color:
+Black line art. Warm color accents. Orange for flow arrows. Red or soft pink for emphasis/hearts. Blue for system/AI elements if needed.
+
+Constraints:
+Each step is a small vignette, not a full panel with borders. Steps connected by arrows or a flow path. No heavy card borders or section headers. Each label is SHORT (2-6 characters). One summary line at bottom is OK. Should feel like a warm visual story, not a textbook diagram.
+```
 
 ---
 
