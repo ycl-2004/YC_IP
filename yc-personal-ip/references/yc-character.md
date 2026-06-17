@@ -34,7 +34,7 @@ YC 是 YC 个人 IP 内容配图的固定视觉角色。每张图默认出现 YC
 
 ## 生图关键词（必须包含）
 
-### Simple / Rich 模式（全彩 chibi）
+### Simple 模式（全彩 chibi）
 
 ```
 chibi character, messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle round face, chibi proportions large head small body, casual streetwear, small earring, silver chain necklace, white sneakers
