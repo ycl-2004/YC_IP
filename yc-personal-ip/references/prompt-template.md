@@ -2,7 +2,15 @@
 
 每张图单独生成，根据内容替换变量。
 
-**三种模式**：先确定用户要 Rich / Simple / Minimal，再选对应模板。未指定默认 Simple。
+**三种模式**：先确定用户要 Rich / Simple / Sticker，再选对应模板。未指定默认 **Sticker 贴图**。
+
+> ⚠️ **生图必须带参考图**。纯文字 prompt 不够稳，模型会回退到"精致全彩 anime + 满版拼贴"的海报先验。每次生图都附风格参考图：
+> - Sticker 模式 → 附 `assets/examples/sticker/` 里的贴纸校准图（白底水彩铅笔单角色）。还没有校准图时，附 `assets/examples/character-reference/` 锁角色 + 一张外部贴纸图锁"松手绘"画风（两张一起用）。
+> - Simple / Rich 模式 → 附 `assets/examples/simple/` 或 `assets/examples/rich/` 里对应模式的例图。
+> - 锁角色长相 → 任何模式都可加 `assets/examples/character-reference/` 的九宫格。其中 `05/06/07-pose-library-*` 是姿势库（点赞/比耶/拍摄/弹吉他/看书/抱宠物等几十个动作）——想画某个姿势时先翻它找最接近的，再在 prompt 里描述那个动作。
+> 第一次大概率仍会偏 → 正常，带参考图重生成第二次就会对。
+>
+> **参考图控制两件事**：①角色长相 ②画风渲染。Sticker 模式两者都要对 —— 九宫格只能锁①（它是全彩 anime，锁不了水彩铅笔画风），画风要靠一张真正的水彩铅笔贴纸图来锁。
 
 ---
 
@@ -31,45 +39,69 @@ chibi character named YC, messy dark-red burgundy fluffy hair, round clear-frame
 
 ---
 
-## ✦ Minimal 极简模式
+## ✦ Sticker 贴图模式（默认）
 
-极致干净。纯白底 + YC + 一个核心隐喻 + 最多 2-5 个词。图本身就是全部内容。
+一张白底上的水彩铅笔手绘小贴纸。单个 YC + 一个简单动作/物件 + 0-3 个中文短词。轻、干净、留白多。
+
+**必须附参考图**（贴纸校准图）。提示词模板：
 
 ```text
-Generate one standalone {比例} illustration in MINIMAL ultra-clean style.
+Using the attached image ONLY as a STYLE reference (loose watercolor colored-pencil hand-drawing, pure white background, single subject, lots of empty space), generate one standalone {比例} sticker-style illustration.
 
 Visual DNA:
-PURE WHITE background — no cream, no texture, no paper grain, no warmth tint. Black hand-drawn line art with slightly wobbly pen lines. Massive white space — at least 50% of canvas is completely empty. ONE visual metaphor, ONE flow, ONE action. The drawing itself explains the idea — text is almost unnecessary.
+A small hand-drawn STICKER on a PURE WHITE background (#FFFFFF — no cream, no paper texture, no gradient, no shadow, no border). Loose watercolor / colored-pencil hand-drawing: soft sketchy linework with slight wobble, light low-saturation coloring, gentle and airy. NOT glossy polished anime. NOT a flat vector. NOT a dense collage. At least 50% of the canvas is empty white space. ONE single subject only.
 
 IP Character (required):
-YC — chibi character with messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, chibi proportions. Drawn in simple black line art style (not full-color detailed illustration). YC performs the ONE core action that IS the metaphor. YC should feel like a quick but expressive sketch, not a polished anime character.
+YC — chibi character with messy dark-red burgundy hair (keep the red hair clearly recognizable) and round clear-frame glasses. Rendered as a LOOSE, lightly-colored watercolor-pencil sketch — soft and hand-drawn, NOT a high-gloss detailed anime illustration, NOT heavy shading. YC is the only character and does the ONE simple action.
 
-Scene:
-{一个核心隐喻画面：YC 和什么物件在做什么动作}
+Scene (keep it to ONE simple thing):
+{YC 在做一个简单动作 / 和一个简单物件互动}
 
-Labels (STRICT MAXIMUM 2-5 short words, Chinese only):
-{极短词1} / {极短词2} / {可选词3}
+Labels (0-3 short Chinese words MAX, Chinese only — prefer fewer or none):
+{可选短词1} / {可选短词2}
 
 Color:
-Black line art for everything. ONLY ONE accent color — orange for directional arrows/flow, OR red for key emphasis. No blue. No pink. No hearts. No sparkles. No decorative elements.
+YC's red hair is the main color anchor. Optional very light warm accents only (soft beige / soft blue / soft pink), low saturation. No bold blocks of color. No rainbow.
 
-Constraints:
-PURE WHITE background — this is the #1 rule. No cream, no off-white. Drawing style is loose hand-sketch, NOT polished anime illustration. No section headers. No English text. No title banners. No panels. No frames. No tables. No numbered steps. No signature props (no MacBook, no smiley mug — unless they ARE the metaphor). No decorative hearts/stars/sparkles. The image should look like someone quickly sketched an idea on blank white paper to explain ONE thing. Maximum 2-5 Chinese words total on the entire image. If you remove ALL text, the image should still make complete sense.
+Constraints (these prevent the "poster" drift):
+PURE WHITE background — #1 rule. ONE single subject — no multiple scenes, no panels, no step-by-step flow, no grid. NO sticky-note wall. NO big "YC" logo or title banner. NO surrounding clutter of books / pen cups / plants / mugs (drop ALL signature props unless ONE prop IS the point of the image). NO scattered hearts / stars / sparkles. NO English text, NO bilingual labels, NO section headers, NO tables. At most ONE small relevant prop. Draw YC DIRECTLY on the white paper — NO die-cut white outline / border / cutout edge around the character (it is a watercolor drawing on white, not a peel-off sticker with a white rim). The result should look like a single small watercolor-pencil drawing — light, clean, plenty of white space. If you removed all text, the image should still make complete sense.
 ```
 
-### Minimal 模式的隐喻构思法
+### Sticker 模式构思法
 
-每次从内容重新发明一个视觉隐喻：
+保持"一张小贴纸"的克制：
 
-1. 把抽象概念换成一个物理动作：搬运、卡住、漏掉、变重、过滤、连接、断开
-2. 把系统/结构换成一个低科技物件：传送带、纸箱、漏斗、秤、梯子、井、门、桥
-3. 让 YC 成为动作的执行者 — 拉、扛、塞、撑、推、接、拆
+1. 只画 **一个 YC + 一个意思**：一个表情、一个动作、或 YC 和一个物件互动。不要讲流程、不要分格。
+2. 物件要少而准：一台笔记本、一本书、一个杯子、一个灯泡 —— 选**一个**和主题最相关的，其余全删。
+3. 宁可不写字。要写就 1-3 个中文短词，放在角色旁边的空白处，手写感。
+4. 留白是主角：画完先问"是不是太满了"，太满就删元素，不是缩小。
 
-**例子：学习流程 Minimal 版**
-- 画面：YC 站在一条简单的传送带旁边，左边是散乱的纸片（输入），YC 在中间把纸片压进一个小盒子里（消化），右边盒子里整齐放着几本小册子（输出）
-- 只标注：「输入」→「消化」→「输出」
-- 纯白底，黑色线稿，橙色箭头表示方向
-- 没有步骤编号，没有装饰，没有 section
+**例子：「专注写作」贴图版**
+- 画面：YC 托腮看着一台合上的小笔记本，旁边一个小杯子
+- 标注：「专注」（或不标）
+- 纯白底，水彩铅笔轻涂，红发是唯一明显的颜色
+- 没有便利贴、没有 logo、没有装饰、大量留白
+
+**例子：「捕捉灵感」贴图版**
+- 画面：YC 抬手去接一个飘下来的小灯泡
+- 标注：「灵感来了」
+- 单角色单物件，其余全白
+
+### Sticker 封面版（文章封面 / 标题图）
+
+封面 ≠ 海报。还是贴纸逻辑：**一个 YC hero + 一行标题 + 白底**，标题是唯一允许的"多字"。常用 16:9 或 4:3。
+
+```text
+Using the attached sticker reference for exact style, generate one standalone {16:9 / 4:3} cover image.
+
+Style: loose watercolor colored-pencil hand-drawing, pure white background, single character, lots of empty white space — same sticker style as the reference.
+
+Layout: ONE YC character (messy dark-red hair, clear-frame glasses, watercolor-pencil sketch) placed to one side OR centered, doing a single gesture related to the topic. A short Chinese title in clean hand-written style in the empty space beside YC.
+
+Title text: 「{文章标题，≤10 字}」   （副标题可选，≤8 字）
+
+Hard rules: pure white background. ONE character only. At most ONE small relevant prop. NO surrounding clutter, no sticky notes, no panels, no scattered decorations. The title is the only block of text. Keep at least 45% empty white space. It should look like a clean watercolor sticker with a title, NOT a busy poster.
+```
 
 ---
 

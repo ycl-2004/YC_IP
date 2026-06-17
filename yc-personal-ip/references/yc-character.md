@@ -34,9 +34,23 @@ YC 是 YC 个人 IP 内容配图的固定视觉角色。每张图默认出现 YC
 
 ## 生图关键词（必须包含）
 
+### Simple / Rich 模式（全彩 chibi）
+
 ```
 chibi character, messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle round face, chibi proportions large head small body, casual streetwear, small earring, silver chain necklace, white sneakers
 ```
+
+### Sticker 贴图模式（水彩铅笔轻渲染）
+
+贴图模式要的是**松手绘小贴纸**，不是精致全彩 anime。保留红发+眼镜识别，但渲染要轻：
+
+```
+chibi character YC, messy dark-red burgundy hair (red hair clearly recognizable), round clear-frame glasses, chibi proportions, drawn as a LOOSE watercolor colored-pencil sketch — soft sketchy linework with slight wobble, light low-saturation coloring, hand-drawn and airy, NOT glossy polished anime, NOT heavy shading, single subject on pure white background
+```
+
+- 去掉 big expressive anime eyes 的高光精修感，换成简单柔和的眼睛
+- 配件（耳环/项链/运动鞋）能省则省，贴图重在轻和识别度，不堆细节
+- 红发是唯一需要"明显"的颜色，其余轻轻带过
 
 ## 表情/状态库
 

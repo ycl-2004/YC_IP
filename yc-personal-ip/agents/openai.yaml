@@ -1,6 +1,6 @@
 interface:
   display_name: "YC 个人 IP 配图"
-  short_description: "为 YC 的中文内容生成温暖手账 editorial 风格的个人品牌配图"
-  default_prompt: "Use $yc-personal-ip to 为这篇内容生成 YC 风格的配图。"
+  short_description: "用 YC 红发 chibi 角色生成中文配图。默认干净水彩铅笔小贴纸（Sticker），也支持多步故事流（Simple）和满版 editorial（Rich）。"
+  default_prompt: "Use $yc-personal-ip to 为这篇内容生成 YC 风格的配图（默认贴纸风，白底干净）。"
 policy:
   allow_implicit_invocation: true
