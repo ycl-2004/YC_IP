@@ -62,7 +62,7 @@ MINIMAL TEXT — the image should be understandable even without reading any lab
 
 ### Simple 模式的隐喻构思法
 
-和 Ian 小黑一样，每次从内容重新发明一个视觉隐喻：
+每次从内容重新发明一个视觉隐喻：
 
 1. 把抽象概念换成一个物理动作：连接、攀爬、浇灌、拼图、开门、过桥、称重
 2. 把系统/结构换成一个低科技物件：黑板、梯子、天平、种子、桥、门、容器
