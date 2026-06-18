@@ -18,8 +18,9 @@
 用户只说“跟这个 skill 一样的风格解释 X / 什么是 X / explain X”时，不要要求用户补长 prompt。直接按默认 Sample / Standard 生成一张 Broad Concept Explainer：
 
 - 把 X 压成一个核心隐喻。
-- 构图固定为：输入材料 → YC 操作/学习/处理 → 输出结果。
-- 标注只留 3-4 个中文短词。
+- 先读 `concept-director.md`，写清“不是 A，而是 B”的机制判断。
+- 构图为一个连续场景：具体例子 → YC 操作 → 可见的中间结构 → 新输入 → 具体判断。
+- 标注默认 4-6 个中文短词；每个词都要推进因果，不要写装饰性口号。
 - 禁止百科页、课程卡片、定义段落、分类列表、真实案例列表、底部总结条。
 
 ---
@@ -81,31 +82,48 @@ Theme:
 Core idea:
 {这张图要表达的核心意思}
 
+Mechanism statement:
+{用“不是 A，而是 B”写出概念真正怎样工作}
+
+Cognitive action and physical verb:
+{分类/匹配/预测等一个认知动作} expressed as {倒入/摇动/分拣/织网/测试等可见物理动作}
+
 Composition:
 {具体画面：YC 在哪里、正在做什么、核心物件/隐喻是什么、信息如何流动}
+
+Causal beats in one continuous scene (not panels):
+1. Examples: {2-3 组具体、可区分、必要时带答案的输入}
+2. Learning/processing: {YC 操作装置的明确动作}
+3. Learned structure: {装置内部或出口形成的网/筛/轨道/刻度/模板}
+4. Test and prediction: {一个新输入如何被结构判断，并得到什么具体结果}
+
+Semantic micro-details:
+{只列 2-4 个能解释机制的细节；不要列装饰}
 
 Suggested elements:
 {元素1} / {元素2} / {元素3} / {可选元素4}
 
 Chinese handwritten labels:
-{标注词1} / {标注词2} / {标注词3} / {可选标注词4}
+{标注词1} / {标注词2} / {标注词3} / {标注词4} / {可选标注词5} / {可选标注词6}
 
 Color:
 YC's red hair is the main color anchor. Black line art, warm beige/gray object shading, orange for flow arrows or movement, red/pink for emphasis, blue only for system/AI/secondary notes.
 
 Constraints:
-One image explains one core idea. If the topic is broad ("what is X"), compress it into one visual metaphor instead of a textbook overview. Keep the background pure white. Keep labels short, Chinese-first, and readable. No title banner, no definition paragraph, no type/category list, no real-company example list, no bottom summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the current examples' density and finish.
+One image explains one core mechanism, with enough semantic detail to make its causality visible. Use one main device, 2-3 input groups, one visible learned/processed structure, one test input, and one concrete output when the concept needs them. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve roughly 30%-40% blank space. Keep labels short, Chinese-first, readable, and usually within 4-6 labels. No title banner, no definition paragraph, no type/category list, no real-company example list, no bottom summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the current examples' density and finish.
 ```
 
 ### Broad Concept Explainer 构思法
 
 大概念不要画百科页。只画一个核心隐喻：
-1. 输入：概念吃进去什么材料。
-2. 操作：YC 正在怎样处理它。
-3. 输出：产生什么结果。
-4. 标注：最多 3-4 个中文短词。
+1. 机制：先写“不是 A，而是 B”。
+2. 例子：输入要具体、可区分，必要时显示已有答案。
+3. 操作：YC 用一个可见物理动作驱动装置。
+4. 结构：画出学习/处理后留下的网、筛、轨道、刻度或模板。
+5. 验证：让一个新输入经过结构，得到具体结果。
+6. 标注：默认 4-6 个中文短词，只标因果节点。
 
-例：「什么是 Machine Learning」→ YC 把很多“数据”卡片倒进一台“学习机器”，机器观察重复图案，吐出一张“预测”卡片。标注：`数据` / `找规律` / `模型` / `预测`。
+例：「什么是 Machine Learning」→ 左侧苹果/香蕉/西瓜例子篮，中间 YC 流汗摇动“学习”曲柄，机器把颜色、形状、纹理织成“模型”规则网；右侧一个没标签的新水果落入网中，机器吐出“预测：苹果？”票据。标注：`例子` / `学习` / `找规律` / `模型` / `新问题` / `预测：苹果？`。
 
 ---
 
