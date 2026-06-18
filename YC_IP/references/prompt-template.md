@@ -70,8 +70,13 @@ chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, exp
 
 当前 samples 风格。纯白底，温暖手绘 chibi，YC 参与核心动作，中文短标注，中等信息密度。默认文章配图、知识讲解、封面、社媒都先用这一档。参考 `assets/examples/simple/current-showcase/`。
 
+> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 操作一件低科技装置的连续手绘场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + 低科技装置，再填下面的变量。若无法把参考图作为附件喂给生图工具（如 web 浏览场景），直接用下面这段自带的完整文字 Visual DNA 生成，它按"无参考图也成立"写。
+
 ```text
-Using the attached canonical `07-noise-filter.png` image ONLY as a STYLE and RESTRAINT reference, generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style. Do not copy its sieve composition; preserve only its white canvas, single-character staging, pencil line quality, light coloring, sparse labels, and whitespace.
+Using the attached canonical `07-noise-filter.png` image ONLY as a STYLE and RESTRAINT reference, generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style. (If no reference image can be attached, follow this full Visual DNA verbatim — it is written to stand alone.) Do not copy its sieve composition; preserve only its white canvas, single-character staging, pencil line quality, light coloring, sparse labels, and whitespace.
+
+Reframing rule (highest priority):
+Even if the topic is described as a "structure / architecture / explainer diagram", DO NOT draw a boxes-and-arrows architecture diagram, encoder/decoder blocks, a PPT infographic, or a formal flowchart. Reframe the structure into ONE continuous hand-drawn scene where YC physically operates a low-tech device (loom, sorter, press, bridge, conveyor, filter, weaving machine) that embodies the mechanism. Tokens/inputs enter on one side, YC works the device, a visible learned/processed structure forms inside it, and a new input exits as a concrete prediction/result.
 
 Visual DNA:
 STYLE IS THE HIGHEST PRIORITY; reduce content before violating it. PURE WHITE background (#FFFFFF) across the entire canvas, no cream paper tint, no full-page gray/off-white wash, no black or dark area, no paper texture, no gradient, no neon, no glow. Warm hand-drawn chibi illustration with slightly wobbly pencil-like sketch lines and light low-saturation coloring. EXACTLY ONE YC character, integrated into ONE continuous scene and performing the core action. No duplicate YC, no panels, no card grid, no numbered steps, no UI screens, no photoreal images. Medium information density: one clear visual metaphor, a few physical objects, 3-5 short handwritten Chinese labels, and 35%-45% empty white space.
