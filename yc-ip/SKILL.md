@@ -1,5 +1,5 @@
 ---
-name: YC_IP
+name: yc-ip
 description: 生成 YC 风格的中文个人 IP 配图。调用本 skill、要求“用 YC 解释 X”或“做一张 X 的图”时，默认必须直接调用 image_gen 生成并交付图片，不能只输出分析、画面方案或生图 prompt；只有用户明确说只分析、只要 prompt、shot list 或不要生成时才停在文字。默认使用 Sample/Standard 成品风格：纯白底、YC 红发透明眼镜 chibi、手绘线条、中文短标注、中等信息密度。只有用户明确点名 Minimal/Sticker/贴图纸/贴纸/极简/最小贴纸时才启用 Minimal；只有明确点名 Rich、完整海报、IP 设定页或品牌全景时才启用 Rich。默认比例：文章 16:9 / 社媒 1:1。
 ---
 

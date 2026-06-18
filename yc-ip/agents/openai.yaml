@@ -1,0 +1,6 @@
+interface:
+  display_name: "YC 个人 IP 配图"
+  short_description: "用红发透明眼镜 YC 生成白底手绘中文配图；默认 Sample，并直接出图。"
+  default_prompt: "Use $yc-ip to 直接生成一张 YC 风格图片。默认 Sample / Standard。铁律：哪怕用户说'结构图/架构图/解释图/diagram'，也必须把它改写成 YC 亲手操作的低科技装置手绘场景，绝不画方框+箭头的论文式架构图。抽象/知识主题先读 concept-director.md 做'不是A而是B'机制判断，再读 style-gate。能附图时附 canonical 07-noise-filter.png；无法附图(如 web 浏览)就用 prompt-template 自带的完整文字 Visual DNA 独立成图。纯白底、一个 YC、一个连续手绘场景、3-5 个中文短标注；完成内部构思后必须调用 image_gen，不要只输出分析或 prompt。"
+policy:
+  allow_implicit_invocation: true
