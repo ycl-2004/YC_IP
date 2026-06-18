@@ -1,6 +1,6 @@
 interface:
   display_name: "YC 个人 IP 配图"
-  short_description: "用 YC 红发 chibi 角色生成中文配图。默认 Sticker / Minimum；流程和对比用 Simple；Rich 仅在明确点名完整海报、IP设定页或品牌全景时启用。"
-  default_prompt: "Use $YC_IP to 为这篇内容生成 YC 风格配图（默认 Sticker / Minimum，白底干净）。"
+  short_description: "用红发透明眼镜 YC 生成白底手绘中文配图；默认 Sample，并直接出图。"
+  default_prompt: "Use $YC_IP to 直接生成一张 YC 风格图片。默认 Sample / Standard；先读取 style-gate，实际附带 canonical 07-noise-filter.png，完成内部构思后必须调用 image_gen。纯白底、一个 YC、一个连续手绘场景；不要只输出分析或生图 prompt。"
 policy:
   allow_implicit_invocation: true

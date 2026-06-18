@@ -1,6 +1,6 @@
 ---
 name: YC_IP
-description: 生成 YC 风格的中文个人 IP 配图。默认使用 Sample/Standard 成品风格，对齐 assets/examples/simple/current-showcase/ 和 README examples/images：纯白底、YC 红发透明眼镜 chibi、手绘线条、中文短标注、中等信息密度。只有用户明确点名 Minimal/Sticker/贴图纸/贴纸/极简/最小贴纸时才启用 Minimal 贴纸模式；只有明确点名 Rich、完整海报、IP 设定页或品牌全景时才启用 Rich 丰富模式。用于文章正文配图、文章封面/标题、社媒单图、知识讲解、自我介绍等。默认比例：文章 16:9 / 社媒 1:1；其余比例仅在用户点名时使用。
+description: 生成 YC 风格的中文个人 IP 配图。调用本 skill、要求“用 YC 解释 X”或“做一张 X 的图”时，默认必须直接调用 image_gen 生成并交付图片，不能只输出分析、画面方案或生图 prompt；只有用户明确说只分析、只要 prompt、shot list 或不要生成时才停在文字。默认使用 Sample/Standard 成品风格：纯白底、YC 红发透明眼镜 chibi、手绘线条、中文短标注、中等信息密度。只有用户明确点名 Minimal/Sticker/贴图纸/贴纸/极简/最小贴纸时才启用 Minimal；只有明确点名 Rich、完整海报、IP 设定页或品牌全景时才启用 Rich。默认比例：文章 16:9 / 社媒 1:1。
 ---
 
 # YC 个人 IP 配图
@@ -11,14 +11,26 @@ description: 生成 YC 风格的中文个人 IP 配图。默认使用 Sample/Sta
 
 YC 角色：深红凌乱短发 + 圆框透明眼镜 + chibi 比例。**红发和眼镜是识别命脉，必须有。**
 
+## 交付物闸门（最高优先级）
+
+本 skill 的默认交付物是**生成完成的图片**，不是文字解释、构图方案或最终 prompt。
+
+- 用户调用本 skill，或说“用 YC 解释 X / 什么是 X / 做一张 X 的配图 / 跟这个风格一样”时：完成内部构思后，必须在同一轮调用 `image_gen` 生成图片。
+- “概念解释、画面隐喻、短标注、最终 illustration prompt”都只是内部中间产物；不要把它们当作任务完成状态。
+- 只有用户明确说“只分析 / 先分析 / 只要方案 / 只要 prompt / shot list / 不要生成图片”时，才输出文字并停止。
+- 如果 `image_gen` 不可用或调用失败，明确说明失败原因；不要假装文字方案等于已交付图片。
+
+**发送最终回复前强制检查**：用户是否明确要求只要文字？如果没有，当前轮是否已经成功调用 `image_gen`？若没有，禁止结束回复，立即生成图片。
+
 ## Quick Intent Router（短 prompt 也要这样理解）
 
 用户不需要写长 prompt。只要用户说“用这个 skill / 跟这个风格一样 / same style / 解释 X / 什么是 X”，默认就按 **Sample / Standard Broad Concept Explainer** 执行：
 
 - 先把 X 压成一个核心隐喻，而不是百科页。
 - 画一个中心场景：左边具体例子，中间 YC 操作并形成可见结构，右边用新输入得到具体判断。
-- 默认保留 4-6 个中文短标注，只标因果节点。
+- 默认保留 3-5 个中文短标注，只标因果节点。
 - 不要定义段落、分类列表、真实公司案例、底部总结条、section header 或教学卡片排版。
+- 完成构思后立即调用 `image_gen`；不要先把构思长篇输出给用户，也不要停在“最终提示词”。
 - 只有用户明确说 Minimal / Sticker / 贴图纸 / 贴纸 / 极简时才变成 Minimal；只有明确说 Rich / 完整海报 / IP 设定页时才变成 Rich。
 
 例：用户只说“跟这个 skill 一样的风格解释 machine learning”，也应生成：YC 把分好类的水果例子倒进手摇学习机，机器把可见特征织成规则网，再用一个新水果测试并输出“苹果？”预测。
@@ -51,9 +63,10 @@ YC 角色：深红凌乱短发 + 圆框透明眼镜 + chibi 比例。**红发和
 
 ## 先读这些参考
 
-**默认 Sample 路径只需两个文件**（角色关键词已并进模板，别一次塞满上下文）：
+**所有实际生图先读三个文件**（角色关键词已并进模板，别一次塞满上下文）：
 - `references/prompt-template.md`：生图提示词模板（含三模式角色关键词、约束、参考图指令）
 - `references/qa-checklist.md`：生成后检查
+- `references/style-gate.md`：实际生成时必读；规定 canonical reference、preflight、失败条件和自动重试
 - `references/concept-director.md`：解释抽象概念、方法或系统机制时必读；先完成视觉推理，再写生图 prompt
 
 按需再读：
@@ -72,34 +85,35 @@ YC 角色：深红凌乱短发 + 圆框透明眼镜 + chibi 比例。**红发和
 
 如果用户问的是“什么是 X / explain X / 解释某个大概念”，默认不要做百科课件或整页教学卡片。读取 `references/concept-director.md`，先写出“不是 A，而是 B”的机制判断，再把认知动作变成物理动词、低科技装置、YC 的不可替代职责和一个验证用的新输入。只讲这个概念最重要的一层，但要画完整因果：**具体例子 → YC 操作 → 学到/处理后留下的结构 → 新输入 → 具体判断**。
 
-不要把“一个核心隐喻”误解成只有三个泛化节点。Sample 默认可包含 1 件主装置、2-3 组输入、1 个可见中间结构、1 个新输入、1 个输出和 4-6 个中文短标注；增加语义细节，不增加装饰、面板或长文。
+不要把“一个核心隐喻”误解成只有三个泛化节点。Sample 默认可包含 1 件主装置、2-3 组输入、1 个可见中间结构、1 个新输入、1 个输出和 3-5 个中文短标注；增加语义细节，不增加装饰、面板或长文。
 
-### 2. 先出配图策略（用户说"分析/shot list/帮我想"时）
+### 2. 先出配图策略（仅限用户明确要求只分析时）
 
-每张写：放在哪段后、主题+核心意思、用哪个模式、YC 在做什么、建议比例、建议元素和标注词。简短即可。
+只有用户明确说“只分析 / 先分析 / 只要方案 / 只要 prompt / shot list / 不要生成”时才停在这里。每张写：放在哪段后、主题+核心意思、用哪个模式、YC 在做什么、建议比例、建议元素和标注词。简短即可。
 
 ### 3. 单张生成（必须带参考图）
 
-用户说"生成/出图/帮我做"时，用 `image_gen` **每张单独生成**，不要拼一起。纯文字 prompt 会跑成海报，每张都附参考图：
+除非用户明确要求只要文字，否则用 `image_gen` **每张单独生成**，不要拼一起。调用 skill、说“解释 X / 什么是 X / 跟这个风格一样”本身就视为生成意图，不需要用户再次说“生成”。纯文字 prompt 会跑成海报，每张都附参考图：
 
-- Sample / Standard → 优先看 `assets/examples/simple/current-showcase/`；方法类图可额外参考 `08-idea-press-machine.png`、`09-trust-bridge.png`、`10-purpose-sort-machine.png`、`11-one-source-many-outputs.png`
+- Sample / Standard Broad Concept → 固定附 `assets/examples/simple/current-showcase/07-noise-filter.png` 作为唯一 canonical style lock；不要附 `05-concept-explainer.png`、多角色/多场景图或九宫格
+- 其他 Sample 方法图 → 仍优先附 `07-noise-filter.png`；只有用户明确要求复刻某种构图时才换其他单场景参考
 - Minimal / Sticker → 仅用户显式点名时，固定带 `assets/examples/sticker/00-reference-sheet-watercolor.png`（canonical 画风锁）；长相不稳再加 character-reference
 - Cover → `assets/examples/cover/01-sticker-cover-tiny-win.png` 可作 16:9 封面版布局/密度参考，但默认仍保持 Sample 风格，不自动变 Rich
 - Social → `assets/examples/social/01-social-1x1-tiny-win.png` 可作 1:1 社媒单图布局/密度参考
 - Rich → `assets/examples/rich/`（仅用户显式点名 Rich 时）
 - 角色长相不稳时额外加 `assets/examples/character-reference/`
 
-每张提示词必含：明确比例 + YC 关键词（红发 + 透明眼镜 + chibi）+ 模式画风要点。第一次仍偏属正常，带参考图重生一次即对。
+每张提示词必含：明确比例 + YC 关键词（红发 + 透明眼镜 + chibi）+ 模式画风要点 + `style-gate.md` 的全部 Sample preflight 约束。参考图必须作为图像工具的实际输入传入，不能只在 prompt 里声称“attached”。
 
 `assets/examples/` 只校准画风+角色，**不照抄构图**——每次从当前内容重新想画面。
 
 Sample 的方法类图要把“方法”变成画面里的场景物件：压缩机、桥、分拣机、传送带、输出装置、过滤器等。YC 必须正在操作这个物件或参与核心动作。不要画成 PPT 线框图，不要把 YC 当贴纸贴在流程图旁边，不要让角色周围出现白色矩形边框。
 
-知识解释图也按 Sample 处理：例如“什么是 Machine Learning”不要只画“数据 → 机器 → 预测”。应画 YC 把分好类的水果例子倒进手摇学习机，机器把颜色/形状/纹理织成可见的规则网，再让一个没有标签的新水果落入网中，输出“苹果？”预测；默认 4-6 个中文短标注。不要生成包含大标题、定义段落、类型列表、真实公司例子和总结条的 textbook infographic。
+知识解释图也按 Sample 处理：例如“什么是 Machine Learning”不要只画“数据 → 机器 → 预测”。应画 YC 把分好类的水果例子倒进手摇学习机，机器把颜色/形状/纹理织成可见的规则网，再让一个没有标签的新水果落入网中，输出“苹果？”预测；默认 3-5 个中文短标注。不要生成包含大标题、定义段落、类型列表、真实公司例子和总结条的 textbook infographic。
 
 ### 4. 检查与迭代
 
-过 `qa-checklist.md`。常见问题：
+先过 `style-gate.md` 的视觉 Pass / Fail，再过 `qa-checklist.md`。Sample 出现任一硬失败信号时，不交付，自动重生成，最多 2 次。常见问题：
 - YC 没红发/眼镜 → 角色失败，重生成
 - Sample：背景不是纯白、方法没有变成场景物件、YC 没参与核心动作、太像 PPT/信息图 → 重生成或补回
 - Minimal：只有显式点名才可用；若没点名却生成得过轻，升回 Sample
@@ -114,4 +128,4 @@ assets/<content-slug>/01-topic-name.png
 
 ## 输出口径
 
-策略输出简洁。交付含：生成张数、每张用途、保存路径、哪张最稳。不解释风格理论，让图说话。
+默认先生成再交付。策略输出仅用于用户明确要求的只分析模式。图片生成成功后，交付含：生成张数、每张用途、保存路径、哪张最稳；不要再附上大段概念分析或完整 prompt，让图说话。

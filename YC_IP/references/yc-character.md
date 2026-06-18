@@ -10,7 +10,7 @@ YC 是 YC 个人 IP 内容配图的固定视觉角色。每张图默认出现 YC
 
 - **头发**：蓬松凌乱的深红/酒红色短发 — 最重要的识别标志
 - **眼镜**：圆形透明/细框眼镜（clear frame glasses）
-- **眼睛**：大而有神，anime chibi 比例
+- **眼睛**：简单柔和、有神，但不要 glossy anime 高光
 - **脸型**：小而柔和，圆润
 - **比例**：chibi — 头大身小，细手细腿
 
@@ -37,7 +37,7 @@ YC 是 YC 个人 IP 内容配图的固定视觉角色。每张图默认出现 YC
 ### Sample / Standard 模式（默认）
 
 ```
-chibi character, messy dark-red burgundy hair, round clear-frame glasses, big expressive anime eyes, small gentle round face, chibi proportions large head small body, casual streetwear, small earring, silver chain necklace, white sneakers
+chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, simple gentle eyes without glossy highlights, small gentle round face, chibi proportions large head small body, casual streetwear, warm pencil-like hand-drawn sketch, light low-saturation coloring
 ```
 
 ### Minimal / Sticker 贴图模式（水彩铅笔轻渲染）
@@ -48,7 +48,7 @@ Minimal / Sticker 模式要的是**松手绘小贴纸**，不是默认 Sample，
 chibi character YC, messy dark-red burgundy hair (red hair clearly recognizable), round clear-frame glasses, chibi proportions, drawn as a LOOSE watercolor colored-pencil sketch — soft sketchy linework with slight wobble, light low-saturation coloring, hand-drawn and airy, NOT glossy polished anime, NOT heavy shading, single subject on pure white background
 ```
 
-- 去掉 big expressive anime eyes 的高光精修感，换成简单柔和的眼睛
+- 眼睛保持简单柔和，不要高光精修或 glossy anime 质感
 - 配件（耳环/项链/运动鞋）能省则省，贴图重在轻和识别度，不堆细节
 - 红发是唯一需要"明显"的颜色，其余轻轻带过
 

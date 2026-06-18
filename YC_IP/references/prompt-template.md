@@ -2,8 +2,10 @@
 
 每张图单独生成，按内容替换 `{变量}`。**默认 Sample / Standard 成品风格**，对齐 `assets/examples/simple/current-showcase/`；只有用户明确点名 Minimal / Sticker / 贴图纸 / 贴纸 / 极简 / 最小贴纸时才用 Minimal；只有用户明确点名 Rich、完整海报、IP 设定页或品牌全景时才用 Rich。
 
+> **执行要求**：本文件中的构思和 prompt 是给 `image_gen` 使用的内部材料。除非用户明确要求只要 prompt 或不要生成，否则写完 prompt 后必须立即调用 `image_gen`，不能把 prompt 当作最终交付。
+
 > ⚠️ **生图必须带参考图**，纯文字 prompt 会回退到"全彩 anime + 满版拼贴"的海报先验。
-> - Sample / Standard（默认）→ 带 `assets/examples/simple/current-showcase/` 中最接近的例图。
+> - Sample / Standard Broad Concept（默认）→ 固定带 `assets/examples/simple/current-showcase/07-noise-filter.png`。它是单角色、白底、单场景 canonical style lock。
 > - Minimal / Sticker（仅显式点名）→ 带 `assets/examples/sticker/00-reference-sheet-watercolor.png`。
 > - 长相锁（红发眼镜不稳时加）→ `assets/examples/character-reference/` 九宫格。注意它是全彩 anime，只能锁长相；Minimal 要 00 + 九宫格两张一起带。
 > - Cover → 看 `assets/examples/cover/01-sticker-cover-tiny-win.png` 的密度：16:9，一个 YC hero + 一行中文标题 + 白底。
@@ -11,7 +13,7 @@
 > - Rich → 仅用户显式点名时，带 `assets/examples/rich/` 对应整页例图。
 > - 第一次仍可能偏 → 正常，带参考图重生一次就对。
 
-参考图只锁"长相+画风+密度"，**不照抄构图**，每次从当前内容重想画面。`sticker/01-08` 是 Minimal 动作姿势库（想画某动作先翻它找最接近的），`sticker/outfit-0x` 是服装变体——都只作构思参考，不当默认画风锁。
+参考图只锁"长相+画风+密度"，**不照抄构图**，每次从当前内容重想画面。Broad Concept 不得使用 `05-concept-explainer.png`、多角色图、Rich 图或 character-reference 九宫格作为默认参考；详见 `style-gate.md`。`sticker/01-08` 是 Minimal 动作姿势库，`sticker/outfit-0x` 是服装变体——都只作构思参考，不当默认画风锁。
 
 ## 短 prompt 路由
 
@@ -20,8 +22,9 @@
 - 把 X 压成一个核心隐喻。
 - 先读 `concept-director.md`，写清“不是 A，而是 B”的机制判断。
 - 构图为一个连续场景：具体例子 → YC 操作 → 可见的中间结构 → 新输入 → 具体判断。
-- 标注默认 4-6 个中文短词；每个词都要推进因果，不要写装饰性口号。
+- 标注默认 3-5 个中文短词；每个词都要推进因果，不要写装饰性口号。
 - 禁止百科页、课程卡片、定义段落、分类列表、真实案例列表、底部总结条。
+- 以上步骤在内部完成；随后立即调用 `image_gen`。禁止只回复概念解释、画面方案或 final illustration prompt。
 
 ---
 
@@ -46,7 +49,7 @@
 
 **Sample / Standard（默认，当前 samples 风格）**：
 ```
-chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, expressive gentle eyes, small gentle round face, chibi proportions (large head small body thin legs), casual streetwear, small earring, silver chain necklace, white sneakers, warm hand-drawn sketchbook illustration, pencil-like linework, lightly colored, personal creator-content style, not corporate, not glossy commercial poster
+chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, simple gentle eyes without glossy anime highlights, small gentle round face, chibi proportions (large head small body thin legs), casual streetwear, warm hand-drawn sketchbook illustration, slightly wobbly pencil-like linework, lightly colored, low saturation, personal creator-content style, not corporate, not glossy anime, not a commercial poster
 ```
 
 **Minimal / Sticker（仅显式点名，水彩铅笔轻渲染）**：
@@ -68,10 +71,10 @@ chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, exp
 当前 samples 风格。纯白底，温暖手绘 chibi，YC 参与核心动作，中文短标注，中等信息密度。默认文章配图、知识讲解、封面、社媒都先用这一档。参考 `assets/examples/simple/current-showcase/`。
 
 ```text
-Using the attached current-showcase image ONLY as a STYLE and DENSITY reference, generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style.
+Using the attached canonical `07-noise-filter.png` image ONLY as a STYLE and RESTRAINT reference, generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style. Do not copy its sieve composition; preserve only its white canvas, single-character staging, pencil line quality, light coloring, sparse labels, and whitespace.
 
 Visual DNA:
-PURE WHITE background (#FFFFFF), no cream paper tint, no full-page gray/off-white wash, no paper texture, no gradient. Warm hand-drawn chibi illustration with pencil-like sketch lines and light coloring. YC is part of the core conceptual action, not a mascot pasted beside a diagram. Medium information density, similar to the current examples: clear visual metaphor, a few objects, short handwritten Chinese labels, plenty of white space.
+STYLE IS THE HIGHEST PRIORITY; reduce content before violating it. PURE WHITE background (#FFFFFF) across the entire canvas, no cream paper tint, no full-page gray/off-white wash, no black or dark area, no paper texture, no gradient, no neon, no glow. Warm hand-drawn chibi illustration with slightly wobbly pencil-like sketch lines and light low-saturation coloring. EXACTLY ONE YC character, integrated into ONE continuous scene and performing the core action. No duplicate YC, no panels, no card grid, no numbered steps, no UI screens, no photoreal images. Medium information density: one clear visual metaphor, a few physical objects, 3-5 short handwritten Chinese labels, and 35%-45% empty white space.
 
 IP Character (required):
 {Sample 角色关键词}. YC must have clearly recognizable messy dark-red burgundy hair and round clear-frame glasses.
@@ -104,13 +107,16 @@ Suggested elements:
 {元素1} / {元素2} / {元素3} / {可选元素4}
 
 Chinese handwritten labels:
-{标注词1} / {标注词2} / {标注词3} / {标注词4} / {可选标注词5} / {可选标注词6}
+{标注词1} / {标注词2} / {标注词3} / {可选标注词4} / {可选标注词5}
+
+Text rendering rule:
+Render ONLY the selected 3-5 short Chinese labels above. The mechanism statement, causal beats, semantic micro-details, and user explanation are private art-direction notes and MUST NOT appear as titles, paragraphs, captions, speech bubbles, numbered steps, or a bottom summary strip.
 
 Color:
 YC's red hair is the main color anchor. Black line art, warm beige/gray object shading, orange for flow arrows or movement, red/pink for emphasis, blue only for system/AI/secondary notes.
 
 Constraints:
-One image explains one core mechanism, with enough semantic detail to make its causality visible. Use one main device, 2-3 input groups, one visible learned/processed structure, one test input, and one concrete output when the concept needs them. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve roughly 30%-40% blank space. Keep labels short, Chinese-first, readable, and usually within 4-6 labels. No title banner, no definition paragraph, no type/category list, no real-company example list, no bottom summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the current examples' density and finish.
+One image explains one core mechanism, with enough semantic detail to make its causality visible. Use exactly one YC, one main device, 2-3 small hand-drawn input objects, one visible learned/processed structure, and one test input or concrete output when the concept needs them. Samples must be simple hand-drawn icons or objects, never photos, screens, cards grid, or a side UI column. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve 35%-45% blank space. Show only 3-5 short Chinese labels. No title banner, no definition paragraph, no speech-bubble paragraph, no type/category list, no bottom process strip, no summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart, no numbered steps, no dark background, no neon, no glow, no photoreal imagery. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the attached canonical reference's style and restraint.
 ```
 
 ### Broad Concept Explainer 构思法
@@ -121,9 +127,9 @@ One image explains one core mechanism, with enough semantic detail to make its c
 3. 操作：YC 用一个可见物理动作驱动装置。
 4. 结构：画出学习/处理后留下的网、筛、轨道、刻度或模板。
 5. 验证：让一个新输入经过结构，得到具体结果。
-6. 标注：默认 4-6 个中文短词，只标因果节点。
+6. 标注：默认 3-5 个中文短词，只标因果节点；机制说明只用于构思，不写进图里。
 
-例：「什么是 Machine Learning」→ 左侧苹果/香蕉/西瓜例子篮，中间 YC 流汗摇动“学习”曲柄，机器把颜色、形状、纹理织成“模型”规则网；右侧一个没标签的新水果落入网中，机器吐出“预测：苹果？”票据。标注：`例子` / `学习` / `找规律` / `模型` / `新问题` / `预测：苹果？`。
+例：「什么是 Machine Learning」→ 左侧苹果/香蕉/西瓜例子篮，中间 YC 流汗摇动“学习”曲柄，机器把颜色、形状、纹理织成“模型”规则网；右侧一个没标签的新水果落入网中，机器吐出“预测：苹果？”票据。标注从这些节点中选 3-5 个：`例子` / `学习` / `特征` / `模型` / `新问题` / `预测：苹果？`。
 
 ---
 

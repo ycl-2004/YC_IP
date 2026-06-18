@@ -10,6 +10,16 @@
 - 产出要贴近 `current-showcase/` 的密度、白底、手绘线条、角色参与感和中文标注方式。
 - `current-showcase/` 是结果 benchmark，不是构图模板；每次仍然要按当前内容重想场景。
 
+### Broad Concept 的唯一默认风格锁
+
+固定使用 `07-noise-filter.png`。它是当前目录中最安全的单角色、白底、单场景机制图。
+
+以下图片可用于浏览和说明，但不能作为 Broad Concept 的默认生图参考：
+
+- `05-concept-explainer.png`：包含多个 YC 和分步构图，容易诱导流程拼贴。
+- `09-human-ai-relay.png` 及其他多角色/多场景图：容易诱导重复角色。
+- 任何 `rich/`、cover、social 或 character-reference 图片：模式或比例不同。
+
 ## sticker/（Minimal / Sticker 显式模式用）
 - **`00-reference-sheet-watercolor.png` = canonical 画风锁。每张 Minimal / Sticker 固定带这一张，别换。** 它锁住"白底水彩铅笔松手绘"这个画风，是 Minimal 不跑成海报的命门。
 - `01-08-*.png`：动作姿势库（坐着用笔记本、托腮思考、拿杯子…）。**只作构思参考**——想画某个动作先翻它找最接近的，不当画风锁。
@@ -34,7 +44,7 @@
 `01-social-1x1-tiny-win.png` 是 1:1 社媒样例，用同一套视觉语言转方图。社媒单图默认对齐 Sample，避免塞成海报。
 
 ## character-reference/（长相锁，跨模式）
-01-07 九宫格 = YC 长相锁。注意它是**全彩 anime，只能锁长相、锁不了水彩画风**——所以 Minimal 要 `00 + 九宫格` 两张一起带。`05/06/07-pose-library-*` 是几十个动作的姿势库。
+01-07 九宫格 = YC 长相锁。注意它是**全彩 anime，只能锁长相、锁不了 Sample/水彩画风**。Broad Concept 默认不要带九宫格；只有连续两次角色识别失败时才作为第二张参考，并明确禁止复制网格和多角色。`05/06/07-pose-library-*` 是动作构思库。
 
 ## rich/（已不在默认路径）
 仅"整页 IP 介绍/品牌全景设定页"这类极少数场景手动启用时才参考。日常忽略。
