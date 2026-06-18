@@ -13,6 +13,15 @@
 
 参考图只锁"长相+画风+密度"，**不照抄构图**，每次从当前内容重想画面。`sticker/01-08` 是 Minimal 动作姿势库（想画某动作先翻它找最接近的），`sticker/outfit-0x` 是服装变体——都只作构思参考，不当默认画风锁。
 
+## 短 prompt 路由
+
+用户只说“跟这个 skill 一样的风格解释 X / 什么是 X / explain X”时，不要要求用户补长 prompt。直接按默认 Sample / Standard 生成一张 Broad Concept Explainer：
+
+- 把 X 压成一个核心隐喻。
+- 构图固定为：输入材料 → YC 操作/学习/处理 → 输出结果。
+- 标注只留 3-4 个中文短词。
+- 禁止百科页、课程卡片、定义段落、分类列表、真实案例列表、底部总结条。
+
 ---
 
 ## 比例参数速查
@@ -85,8 +94,18 @@ Color:
 YC's red hair is the main color anchor. Black line art, warm beige/gray object shading, orange for flow arrows or movement, red/pink for emphasis, blue only for system/AI/secondary notes.
 
 Constraints:
-One image explains one core idea. Keep the background pure white. Keep labels short, Chinese-first, and readable. No long paragraphs, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the current examples' density and finish.
+One image explains one core idea. If the topic is broad ("what is X"), compress it into one visual metaphor instead of a textbook overview. Keep the background pure white. Keep labels short, Chinese-first, and readable. No title banner, no definition paragraph, no type/category list, no real-company example list, no bottom summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the current examples' density and finish.
 ```
+
+### Broad Concept Explainer 构思法
+
+大概念不要画百科页。只画一个核心隐喻：
+1. 输入：概念吃进去什么材料。
+2. 操作：YC 正在怎样处理它。
+3. 输出：产生什么结果。
+4. 标注：最多 3-4 个中文短词。
+
+例：「什么是 Machine Learning」→ YC 把很多“数据”卡片倒进一台“学习机器”，机器观察重复图案，吐出一张“预测”卡片。标注：`数据` / `找规律` / `模型` / `预测`。
 
 ---
 

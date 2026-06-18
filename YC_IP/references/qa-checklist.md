@@ -22,6 +22,12 @@
 - [ ] 没有重型面板边框 / section header（那会变成满版 editorial）
 - [ ] 没有自动降成 Minimal，也没有自动升成 Rich
 
+**Broad Concept Explainer（什么是 X）额外检查：**
+- [ ] 只有一个核心隐喻，不是百科页
+- [ ] 画面能看出“输入 → YC 操作/学习 → 输出”的关系
+- [ ] 没有定义段落、分类列表、真实公司案例列表、底部总结条
+- [ ] 中文短标注控制在 3-4 个左右
+
 **Sample 失败信号：**
 | 信号 | 解决 |
 |------|------|
@@ -30,6 +36,7 @@
 | 变成多面板 + section header | 去掉框和标题，回到手绘场景 |
 | 文字太密 | 只保留最核心中文短标注 |
 | 太像 PPT/流程图 | 强调 hand-drawn warm story, not infographic |
+| 像百科教学卡片 | 压回一个中心隐喻：输入、YC 操作、输出 |
 | YC 像贴纸贴上去 / 有白色边框 | 重生成或编辑去底，强调 character integrated into the scene |
 
 ---
