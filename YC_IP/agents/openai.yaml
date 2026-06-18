@@ -1,0 +1,6 @@
+interface:
+  display_name: "YC 个人 IP 配图"
+  short_description: "用 YC 红发 chibi 角色生成中文配图。默认 Sticker / Minimum；流程和对比用 Simple；Rich 仅在明确点名完整海报、IP设定页或品牌全景时启用。"
+  default_prompt: "Use $YC_IP to 为这篇内容生成 YC 风格配图（默认 Sticker / Minimum，白底干净）。"
+policy:
+  allow_implicit_invocation: true
