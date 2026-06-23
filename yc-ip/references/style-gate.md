@@ -9,26 +9,44 @@
 
 如果内容细节与风格冲突，删内容，不牺牲风格。
 
-## Sample Broad Concept Canonical Reference
+## Topic-matched primary reference
 
-Broad Concept Explainer 和普通 Sample 方法图默认只附这一张风格锁：
+Before generating, read `reference-routing.md` and `assets/examples/README.md`, then scan the real examples to select the closest primary reference. Choose for topic, deliverable ratio, emotional tone, scene language, and information density—not convenience. `07-noise-filter.png` is only the fallback for a compact one-character mechanism scene; it is not a blanket default.
 
-`assets/examples/simple/current-showcase/07-noise-filter.png`
+Pass exactly one selected primary reference as the normal style lock. A character-reference grid may be added only after two character-identity failures, and the prompt must explicitly prohibit copying its grid or multi-character layout.
 
-它负责锁定：纯白背景、单个 YC、温暖铅笔手绘、轻上色、一个核心动作、少量中文标注和足够留白。
+## Reference-Locked Generation Path（正式默认路径）
 
-**不要**把以下图片用于 Broad Concept 的生图参考：
+正式 YC 图片不得优先使用 prompt-only `image_gen`。在 Codex 本地环境里，默认必须使用 `imagegen` skill 的 CLI/API edit 路线，并把参考图作为真实 input image 传入。
 
-- `05-concept-explainer.png`：多个 YC 和分步场景会诱导模型复制成流程拼贴。
-- `09-human-ai-relay.png` 或其他多角色/多场景图：会诱导重复角色。
-- `character-reference/` 九宫格：全彩 anime 和网格构图会污染 Sample 画风；仅在角色长相严重漂移时作为第二张参考，并再次强调不得复制网格。
-- `rich/`、封面或社媒参考：不属于正文概念图。
+命令形态：
 
-每次只附一张 canonical reference。只有角色连续两次识别失败，才允许追加一张 character reference。
+```bash
+python /Users/yichenlin/.codex/skills/imagegen/scripts/image_gen.py edit \
+  --image <blank-canvas.png> \
+  --image <canonical-reference.png> \
+  --prompt-file <prompt.txt> \
+  --size <1536x1024|1024x1024|1024x1536> \
+  --quality high \
+  --input-fidelity high \
+  --out "/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/YYYY-MM-DD-<content-slug>-<topic-name>.png"
+```
+
+Input image 1 必须是纯白 blank canvas，只负责提供新画布。Input image 2 才是按 topic routing 选择的 primary reference，只锁角色身份、线条、白底、克制配色、信息密度和手写中文标注风格。prompt 必须明确禁止复制该参考图的原始构图。
+
+空白画布尺寸必须与 `--size` 一致：16:9 用 `1536x1024`，1:1 用 `1024x1024`，竖图用 `1024x1536`。画布只是纯白 PNG，不要包含任何内容、文字、水印或透明背景。
+
+参考路径：
+
+- Sample / Standard: use the topic-matched asset selected by `reference-routing.md`; `07-noise-filter.png` is fallback only
+- Minimal / Sticker: `assets/examples/sticker/00-reference-sheet-watercolor.png`
+- Rich: `assets/examples/rich/<chosen>.png`
+
+如果当前工具无法传入 input images，只能使用 prompt-only fallback，并且必须把结果标记为 `style draft / 未 reference locked`。不能宣称它是正式 YC locked asset。
 
 ## Sample Broad Concept 生图前 Preflight
 
-调用 `image_gen` 前必须确认最终 prompt 同时包含：
+调用本地 `imagegen` CLI/API edit 前必须确认最终 prompt 与命令同时满足：
 
 - `PURE WHITE #FFFFFF background across the entire canvas`
 - `ONE YC character only`
@@ -38,7 +56,9 @@ Broad Concept Explainer 和普通 Sample 方法图默认只附这一张风格锁
 - `no title, no paragraph, no definition, no summary strip`
 - `no cards grid, no numbered steps, no UI screens, no photoreal images`
 - `render only the listed short Chinese labels; never render the explanatory brief`
-- canonical reference 的具体路径已经传给图像工具，而不是只在文字里说“using attached reference”
+- selected primary reference 的具体路径已经出现在 CLI/API 的 `--image` / input_images 里，而不是只在文字里说“using attached reference”
+- 第一张 input image 是 blank white canvas，第二张 input image 是 topic-matched primary reference
+- prompt 已声明不得复制 selected primary reference 的原构图，只能使用角色、线条、白底、配色克制、密度和手写标注风格
 
 Broad Concept 额外确认：
 

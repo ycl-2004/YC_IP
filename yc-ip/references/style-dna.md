@@ -28,8 +28,8 @@ YC 的视觉是**三档密度**，默认走当前 samples 的中等密度：
 - **连接**：箭头或流动路径串联，**不要**重型面板边框和 section header（那会变满版 editorial）
 - **知识解释限制**：不要同时塞定义、分类、流程、真实案例和总结；一张图只讲一层机制
 - **禁止贴纸感拼贴**：不要把 YC 放在带白色矩形底的截图/贴纸里；人物必须自然融入场景，脚下有轻阴影或接触关系
-- **必带参考图**：Broad Concept 固定用 canonical；其他 Sample 只选一张同模式、同构图密度的单场景参考
-- **Broad Concept canonical**：固定使用 `assets/examples/simple/current-showcase/07-noise-filter.png`；只画一个 YC 和一个连续场景
+- **必带参考图**：先按 `reference-routing.md` 扫描并选择一张主题匹配的真实 asset；其他 Sample 只选一张同模式、同构图密度的 primary reference
+- **机制图 fallback**：`assets/examples/simple/current-showcase/07-noise-filter.png` 仅适用于没有更贴切 topic asset 的单 YC 连续机制场景
 
 ---
 

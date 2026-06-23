@@ -2,10 +2,10 @@
 
 每张图单独生成，按内容替换 `{变量}`。**默认 Sample / Standard 成品风格**，对齐 `assets/examples/simple/current-showcase/`；只有用户明确点名 Minimal / Sticker / 贴图纸 / 贴纸 / 极简 / 最小贴纸时才用 Minimal；只有用户明确点名 Rich、完整海报、IP 设定页或品牌全景时才用 Rich。
 
-> **执行要求**：本文件中的构思和 prompt 是给 `image_gen` 使用的内部材料。除非用户明确要求只要 prompt 或不要生成，否则写完 prompt 后必须立即调用 `image_gen`，不能把 prompt 当作最终交付。
+> **执行要求**：本文件中的构思和 prompt 是给本地 `imagegen` CLI/API edit 使用的内部材料。除非用户明确要求只要 prompt 或不要生成，否则写完 prompt 后必须立即调用 CLI/API，不能把 prompt 当作最终交付。当前聊天内置的 prompt-only `image_gen` 只能作为 fallback 草稿路线。
 
-> ⚠️ **生图必须带参考图**，纯文字 prompt 会回退到"全彩 anime + 满版拼贴"的海报先验。
-> - Sample / Standard Broad Concept（默认）→ 固定带 `assets/examples/simple/current-showcase/07-noise-filter.png`。它是单角色、白底、单场景 canonical style lock。
+> ⚠️ **正式生图必须用 CLI/API 传入参考图**，纯文字 prompt 会回退到"全彩 anime + 满版拼贴"的海报先验。先读 `reference-routing.md` 与 `assets/examples/README.md`，扫描 topic-matched assets 后传入一张 primary reference。
+> - Sample / Standard → 根据主题、比例、情绪与信息密度选择 `assets/examples/simple/current-showcase/` 或 `simple/` 中最贴切的真实 asset；`07-noise-filter.png` 只在没有更贴切主题图时作为机制图 fallback。
 > - Minimal / Sticker（仅显式点名）→ 带 `assets/examples/sticker/00-reference-sheet-watercolor.png`。
 > - 长相锁（红发眼镜不稳时加）→ `assets/examples/character-reference/` 九宫格。注意它是全彩 anime，只能锁长相；Minimal 要 00 + 九宫格两张一起带。
 > - Cover → 看 `assets/examples/cover/01-sticker-cover-tiny-win.png` 的密度：16:9，一个 YC hero + 一行中文标题 + 白底。
@@ -13,7 +13,21 @@
 > - Rich → 仅用户显式点名时，带 `assets/examples/rich/` 对应整页例图。
 > - 第一次仍可能偏 → 正常，带参考图重生一次就对。
 
-参考图只锁"长相+画风+密度"，**不照抄构图**，每次从当前内容重想画面。Broad Concept 不得使用 `05-concept-explainer.png`、多角色图、Rich 图或 character-reference 九宫格作为默认参考；详见 `style-gate.md`。`sticker/01-08` 是 Minimal 动作姿势库，`sticker/outfit-0x` 是服装变体——都只作构思参考，不当默认画风锁。
+参考图只锁"长相+画风+密度"，**不照抄构图**，每次从当前内容重想画面。`reference-routing.md` 决定哪个 example 是 primary reference；不要因为方便而固定使用同一张。`sticker/01-08` 是 Minimal 动作姿势库，`sticker/outfit-0x` 是服装变体——都只作构思参考，不当默认画风锁。
+
+## Multi-Image Edit Prompt Block（CLI/API 专用）
+
+正式生成时，把这段放在 prompt 开头：
+
+```text
+Input image 1 is only the blank output canvas. It is a pure white canvas for creating a new illustration. Do not treat it as style or content.
+
+Input image 2 is the canonical YC reference for this mode. Use image 2 only for character identity, line quality, white background, color restraint, visual density, and handwritten Chinese label style. Do not copy its composition, objects, device, layout, or specific story.
+
+Create a new scene for the requested topic. The output must be a fresh YC illustration, not an edit or copy of the reference image's composition, objects, layout, or story.
+```
+
+正式命令必须使用 `image_gen.py edit --image <blank-canvas> --image <canonical-reference> ...`。如果只能走 prompt-only `image_gen`，必须在交付时标记 `style draft / 未 reference locked`。
 
 ## 短 prompt 路由
 
@@ -24,7 +38,7 @@
 - 构图为一个连续场景：具体例子 → YC 操作 → 可见的中间结构 → 新输入 → 具体判断。
 - 标注默认 3-5 个中文短词；每个词都要推进因果，不要写装饰性口号。
 - 禁止百科页、课程卡片、定义段落、分类列表、真实案例列表、底部总结条。
-- 以上步骤在内部完成；随后立即调用 `image_gen`。禁止只回复概念解释、画面方案或 final illustration prompt。
+- 以上步骤在内部完成；随后立即调用本地 `imagegen` CLI/API edit。禁止只回复概念解释、画面方案或 final illustration prompt。
 
 ---
 
@@ -49,17 +63,17 @@
 
 **Sample / Standard（默认，当前 samples 风格）**：
 ```
-chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, simple gentle eyes without glossy anime highlights, small gentle round face, chibi proportions (large head small body thin legs), casual streetwear, warm hand-drawn sketchbook illustration, slightly wobbly pencil-like linework, lightly colored, low saturation, personal creator-content style, not corporate, not glossy anime, not a commercial poster
+young adult male chibi character YC, short messy dark-red burgundy hair, round clear-frame glasses, gentle masculine brows and face, simple gentle eyes without glossy anime highlights, chibi proportions (large head small body thin legs), casual streetwear, warm hand-drawn sketchbook illustration, slightly wobbly pencil-like linework, lightly colored, low saturation, personal creator-content style, not corporate, not glossy anime, not a commercial poster
 ```
 
 **Minimal / Sticker（仅显式点名，水彩铅笔轻渲染）**：
 ```
-chibi character YC, messy dark-red burgundy hair (red hair clearly recognizable), round clear-frame glasses, chibi proportions, drawn as a LOOSE watercolor colored-pencil sketch — soft sketchy linework with slight wobble, light low-saturation coloring, hand-drawn and airy, NOT glossy polished anime, NOT heavy shading, simple soft eyes (no high-gloss highlights), single subject on pure white background
+young adult male chibi character YC, short messy dark-red burgundy hair (red hair clearly recognizable), round clear-frame glasses, gentle masculine face, chibi proportions, drawn as a LOOSE watercolor colored-pencil sketch — soft sketchy linework with slight wobble, light low-saturation coloring, hand-drawn and airy, NOT glossy polished anime, NOT heavy shading, simple soft eyes (no high-gloss highlights), single subject on pure white background
 ```
 
 **Rich（完整 editorial / IP 设定页）**：
 ```
-chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, expressive but gentle anime eyes, small round face, chibi proportions, casual creative streetwear, silver accessories, warm hand-drawn editorial illustration, polished but still personal and sketchbook-like, not corporate, not glossy commercial poster
+young adult male chibi character YC, short messy dark-red burgundy hair, round clear-frame glasses, gentle masculine face, expressive but gentle anime eyes, chibi proportions, casual creative streetwear, silver accessories, warm hand-drawn editorial illustration, polished but still personal and sketchbook-like, not corporate, not glossy commercial poster
 ```
 
 服装库见 `yc-character.md`（默认 Denim Casual）。
@@ -70,10 +84,14 @@ chibi character YC, messy dark-red burgundy hair, round clear-frame glasses, exp
 
 当前 samples 风格。纯白底，温暖手绘 chibi，YC 参与核心动作，中文短标注，中等信息密度。默认文章配图、知识讲解、封面、社媒都先用这一档。参考 `assets/examples/simple/current-showcase/`。
 
-> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 操作一件低科技装置的连续手绘场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + 低科技装置，再填下面的变量。若无法把参考图作为附件喂给生图工具（如 web 浏览场景），直接用下面这段自带的完整文字 Visual DNA 生成，它按"无参考图也成立"写。
+> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 操作一件低科技装置的连续手绘场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + 低科技装置，再填下面的变量。正式产物必须走 multi-image edit；只有 CLI/API 不可用时才使用 prompt-only fallback，并标记为未 reference locked。
 
 ```text
-Using the attached canonical `07-noise-filter.png` image ONLY as a STYLE and RESTRAINT reference, generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style. (If no reference image can be attached, follow this full Visual DNA verbatim — it is written to stand alone.) Do not copy its sieve composition; preserve only its white canvas, single-character staging, pencil line quality, light coloring, sparse labels, and whitespace.
+Input image 1 is only the blank output canvas. It is a pure white canvas for creating a new illustration. Do not treat it as style or content.
+
+Input image 2 is the selected YC Sample / Standard primary reference (`{selected-reference.png}`), chosen from the real example assets for this topic. Use image 2 ONLY for character identity, line quality, white background, color restraint, visual density, and handwritten Chinese label style. Do not copy its composition, objects, layout, or story.
+
+Generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style. Create a fresh scene for the requested topic; preserve only the reference's white canvas, single-character staging, pencil line quality, light coloring, sparse labels, and whitespace.
 
 Reframing rule (highest priority):
 Even if the topic is described as a "structure / architecture / explainer diagram", DO NOT draw a boxes-and-arrows architecture diagram, encoder/decoder blocks, a PPT infographic, or a formal flowchart. Reframe the structure into ONE continuous hand-drawn scene where YC physically operates a low-tech device (loom, sorter, press, bridge, conveyor, filter, weaving machine) that embodies the mechanism. Tokens/inputs enter on one side, YC works the device, a visible learned/processed structure forms inside it, and a new input exits as a concrete prediction/result.
@@ -121,7 +139,7 @@ Color:
 YC's red hair is the main color anchor. Black line art, warm beige/gray object shading, orange for flow arrows or movement, red/pink for emphasis, blue only for system/AI/secondary notes.
 
 Constraints:
-One image explains one core mechanism, with enough semantic detail to make its causality visible. Use exactly one YC, one main device, 2-3 small hand-drawn input objects, one visible learned/processed structure, and one test input or concrete output when the concept needs them. Samples must be simple hand-drawn icons or objects, never photos, screens, cards grid, or a side UI column. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve 35%-45% blank space. Show only 3-5 short Chinese labels. No title banner, no definition paragraph, no speech-bubble paragraph, no type/category list, no bottom process strip, no summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart, no numbered steps, no dark background, no neon, no glow, no photoreal imagery. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the attached canonical reference's style and restraint.
+One image explains one core mechanism, with enough semantic detail to make its causality visible. Use exactly one YC, one main device, 2-3 small hand-drawn input objects, one visible learned/processed structure, and one test input or concrete output when the concept needs them. Samples must be simple hand-drawn icons or objects, never photos, screens, cards grid, or a side UI column. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve 35%-45% blank space. Show only 3-5 short Chinese labels. No title banner, no definition paragraph, no speech-bubble paragraph, no type/category list, no bottom process strip, no summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart, no numbered steps, no dark background, no neon, no glow, no photoreal imagery. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the attached selected reference's style and restraint.
 ```
 
 ### Broad Concept Explainer 构思法
@@ -143,7 +161,11 @@ One image explains one core mechanism, with enough semantic detail to make its c
 白底上一张水彩铅笔小贴纸。单个 YC + 一个动作/物件 + 0-3 中文短词。轻、干净、留白多。**只有用户明确点名 Minimal / Sticker / 贴图纸 / 贴纸 / 极简 / 最小贴纸时使用，必带 `00-reference-sheet-watercolor.png`。**
 
 ```text
-Using the attached image ONLY as a STYLE reference (loose watercolor colored-pencil hand-drawing, pure white background, single subject, lots of empty space), generate one standalone {比例} sticker-style illustration.
+Input image 1 is only the blank output canvas. It is a pure white canvas for creating a new sticker-style illustration. Do not treat it as style or content.
+
+Input image 2 is the canonical YC Minimal / Sticker reference (`00-reference-sheet-watercolor.png`). Use image 2 ONLY for loose watercolor colored-pencil hand-drawing, pure white background, single subject restraint, red-hair clear-glasses identity, and airy whitespace. Do not copy its sheet layout or poses unless the user explicitly requested that pose.
+
+Generate one standalone {比例} sticker-style illustration.
 
 Visual DNA:
 A small hand-drawn STICKER on a PURE WHITE background (#FFFFFF — no cream, no paper texture, no gradient, no shadow, no border). Loose watercolor / colored-pencil hand-drawing: soft sketchy linework with slight wobble, light low-saturation coloring, gentle and airy. NOT glossy polished anime. NOT a flat vector. NOT a dense collage. At least 50% of the canvas is empty white space. ONE single subject only.
@@ -230,7 +252,11 @@ Each step is a small vignette, not a bordered panel. Steps connected by arrows /
 完整海报 / IP 设定页 / 品牌全景。**不要自动使用**。只有用户明确说 Rich、完整海报、IP 介绍、品牌全景、整页设定图时才用。
 
 ```text
-Using the attached Rich reference image ONLY as a density and layout reference, generate one standalone {比例} YC RICH editorial poster / character-system page.
+Input image 1 is only the blank output canvas. It is a pure white or warm off-white canvas for creating a new Rich illustration. Do not treat it as style or content.
+
+Input image 2 is the chosen YC Rich reference. Use image 2 ONLY for YC identity, editorial density, warm hand-drawn system-page feeling, and short-label treatment. Do not copy its exact sections, objects, or layout unless explicitly requested.
+
+Generate one standalone {比例} YC RICH editorial poster / character-system page.
 
 Visual DNA:
 Warm off-white / cream background with a refined hand-drawn editorial feeling. Full-page composition with multiple organized sections. Rich but still breathable. Personal creator brand energy, not a corporate key visual, not a generic anime poster.

@@ -10,15 +10,11 @@
 - 产出要贴近 `current-showcase/` 的密度、白底、手绘线条、角色参与感和中文标注方式。
 - `current-showcase/` 是结果 benchmark，不是构图模板；每次仍然要按当前内容重想场景。
 
-### Broad Concept 的唯一默认风格锁
+### 按 topic 选择 primary reference
 
-固定使用 `07-noise-filter.png`。它是当前目录中最安全的单角色、白底、单场景机制图。
+每次先读 `../../references/reference-routing.md`，再扫描本目录选择与主题、比例、情绪和信息密度相符的真实 asset。不要固定使用某一张图。`07-noise-filter.png` 仍是安全的单角色、白底、单场景机制图 fallback，但不是通用默认。
 
-以下图片可用于浏览和说明，但不能作为 Broad Concept 的默认生图参考：
-
-- `05-concept-explainer.png`：包含多个 YC 和分步构图，容易诱导流程拼贴。
-- `09-human-ai-relay.png` 及其他多角色/多场景图：容易诱导重复角色。
-- 任何 `rich/`、cover、social 或 character-reference 图片：模式或比例不同。
+所有 reference 都只锁角色、渲染、留白和密度；必须为当前内容重新设计构图。`character-reference/` 九宫格只在角色连续两次漂移时作为第二张修复参考，不能作为普通 Sample 的唯一风格锁。
 
 ## sticker/（Minimal / Sticker 显式模式用）
 - **`00-reference-sheet-watercolor.png` = canonical 画风锁。每张 Minimal / Sticker 固定带这一张，别换。** 它锁住"白底水彩铅笔松手绘"这个画风，是 Minimal 不跑成海报的命门。
