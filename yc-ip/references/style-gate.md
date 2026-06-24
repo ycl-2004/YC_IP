@@ -11,7 +11,7 @@
 
 ## Topic-matched primary reference
 
-Before generating, read `reference-routing.md` and `assets/examples/README.md`, then scan the real examples to select the closest primary reference. Choose for topic, deliverable ratio, emotional tone, scene language, and information density—not convenience. `07-noise-filter.png` is only the fallback for a compact one-character mechanism scene; it is not a blanket default.
+Before generating, read `reference-routing.md` and `assets/examples/README.md`, then scan the real examples to select the closest primary reference. For explainers, also read `explanation-variation.md` and choose a scene archetype before choosing the image reference. Choose for topic, deliverable ratio, emotional tone, scene language, and information density—not convenience. `07-noise-filter.png` is only the fallback for a compact one-character mechanism scene; it is not a blanket default.
 
 Pass exactly one selected primary reference as the normal style lock. A character-reference grid may be added only after two character-identity failures, and the prompt must explicitly prohibit copying its grid or multi-character layout.
 
@@ -62,19 +62,20 @@ Input image 1 必须是纯白 blank canvas，只负责提供新画布。Input im
 
 Broad Concept 额外确认：
 
-- 一个 YC 正在操作一件主装置。
-- 2-3 组样本用小型手绘物件或图标表示，不用照片、显示器或卡片墙。
-- 中间结构是装置的一部分，不拆成多个说明面板。
-- 新输入和预测是同一场景里的收尾，不另做右侧 UI 栏。
+- 已从 `explanation-variation.md` 选择一个场景原型；不是无脑复用机器/箱子。
+- 一个 YC 正在执行核心动作；动作可能是操作装置、铺桥、分拣、校准、撑伞、记录、调音、复盘或展示小成果。
+- 2-3 组样本/声音/证据/干扰/原料用小型手绘物件或图标表示，不用照片、显示器或卡片墙。
+- 中间变化是场景的一部分，不拆成多个说明面板。
+- 验证/回应/结果是同一场景里的收尾，不另做右侧 UI 栏。
 - 全图只显示 3-5 个短标注；机制说明、百分比和长句默认不写进图里。
 
 ## 视觉预算
 
 - 1 个 YC
-- 1 件主装置
-- 2-3 组小型输入物件
-- 1 个可见中间结构
-- 1 个新输入或输出结果
+- 1 个主场景物件或场景锚点
+- 2-3 组小型输入物件 / 声音 / 证据 / 干扰 / 原料
+- 1 个可见中间结构或变化
+- 1 个新输入 / 回应 / 被保护的产出 / 输出结果
 - 3-5 个中文短标注
 - 35%-45% 纯白留白
 

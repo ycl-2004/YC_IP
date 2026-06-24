@@ -1,16 +1,16 @@
 # YC Reference Routing
 
-This file is the source of truth for selecting real YC image references. Read it and `assets/examples/README.md` before every YC image generation.
+This file is the source of truth for selecting real YC image references. Read it, `assets/examples/README.md`, and for explainers `explanation-variation.md` before every YC image generation.
 
 ## Non-negotiable workflow
 
 1. Classify the request by mode, deliverable ratio, topic, and emotional tone.
-2. Scan the corresponding real assets under `assets/examples/`.
+2. Scan the corresponding real assets under `assets/examples/`. When working from the source repo, also scan `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_IP/examples/images/`; these are the same canonical Sample showcase assets and can be used to reason about scene language.
 3. Choose the closest **primary reference** and pass it as an actual image input to the image-generation or edit route. A text prompt that merely names an asset is not compliant.
 4. Add at most one **secondary reference** only when it solves a separate need: a specific approved pose, outfit, or a character-identity correction. Do not stack references for decoration.
 5. Use the references for YC identity, line quality, palette restraint, whitespace, and information density. Build a new scene; never copy the reference composition.
 
-`07-noise-filter.png` is a safe fallback for a one-character, one-device mechanism illustration. It is **not** the blanket default.
+`07-noise-filter.png` is a safe fallback for a one-character, one-device mechanism illustration. It is **not** the blanket default. For explainers, first choose a scene archetype in `explanation-variation.md`; only choose `07-noise-filter.png` when the topic truly needs compact filtering/noise removal or no better archetype fits.
 
 ## Primary-reference routing
 
@@ -36,6 +36,24 @@ This file is the source of truth for selecting real YC image references. Read it
 | Explicit Rich character, brand, workspace, music, or transformation page | the closest `rich/01-05-*.png` asset |
 
 For Sample method scenes, also inspect `simple/08-idea-press-machine.png`, `simple/09-trust-bridge.png`, `simple/10-purpose-sort-machine.png`, and `simple/11-one-source-many-outputs.png`. Use one when its scene metaphor fits the request better than a current-showcase asset.
+
+## Explainer scene variation
+
+For "explain X / what is X" requests, do **not** automatically route to a machine or box. First choose one of these scene languages, then choose the corresponding primary reference:
+
+- Internal transformation / filtering / prediction: `05-concept-explainer.png` or `07-noise-filter.png`
+- Trust / connection / migration: `02-trust-bridge.png`
+- Classification / prioritization: `03-purpose-sort.png`
+- Repurposing / multi-output: `04-one-source-many-outputs.png`
+- Feedback / optimization / habit loop: `08-minimum-loop.png`
+- Human judgment / AI handoff / review: `09-human-ai-relay.png`
+- Emotional or creative translation: `10-emotion-to-melody.png`
+- Focus / writing / coding / creation state: `11-deep-work-corner.png`
+- Boundary / distraction protection: `12-protect-focus.png`
+- Listening / audience research / empathy: `13-audience-listening.png`
+- Small win / progress / encouragement: `14-tiny-win.png`
+
+If two valid references fit, choose the one that changes the scene language away from the most recent output. Avoid consecutive explainers that share the same "wooden machine with crank" silhouette unless the user asked for a series with visual continuity.
 
 ## Character, outfit, and copy
 

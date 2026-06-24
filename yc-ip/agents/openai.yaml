@@ -1,6 +1,6 @@
 interface:
   display_name: "YC 个人 IP 配图"
   short_description: "用红发透明眼镜 YC 生成白底手绘中文配图；默认 Sample，并直接出图。"
-  default_prompt: "Use $yc-ip to 直接生成一张 YC 风格图片。默认 Sample / Standard。先读 reference-routing.md 和 assets/examples/README.md，扫描真实 example assets，按 topic、比例、情绪和信息密度选择 primary reference，并将其作为实际图像输入；07-noise-filter.png 只在没有更贴切主题图时作为 fallback。YC 是男性：短乱酒红发、透明圆框眼镜。铁律：哪怕用户说'结构图/架构图/解释图/diagram'，也必须把它改写成 YC 亲手操作的低科技装置手绘场景，绝不画方框+箭头的论文式架构图。抽象/知识主题先读 concept-director.md 做'不是A而是B'机制判断，再读 style-gate。纯白底、一个 YC、一个连续手绘场景、3-5 个中文短标注；完成内部构思后必须使用 reference-locked image edit，不要只输出分析或 prompt。最终 PNG 必须保存到 /Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/，不要把工具默认输出目录当作最终交付路径。"
+  default_prompt: "Use $yc-ip to 直接生成一张 YC 风格图片。默认 Sample / Standard。先读 reference-routing.md 和 assets/examples/README.md，解释类再读 explanation-variation.md；扫描真实 example assets，按 topic、比例、情绪、信息密度和场景原型选择 primary reference，并将其作为实际图像输入；07-noise-filter.png 只在没有更贴切主题图时作为 fallback。YC 是男性：短乱酒红发、透明圆框眼镜。铁律：哪怕用户说'结构图/架构图/解释图/diagram'，也必须把它改写成 YC 亲手操作的物理隐喻手绘场景；场景可以是装置、桥、循环、接力、桌面、保护、倾听、情绪转换或小胜利，不默认机器。绝不画方框+箭头的论文式架构图。抽象/知识主题先读 concept-director.md 做'不是A而是B'机制判断，再读 style-gate。纯白底、一个 YC、一个连续手绘场景、3-5 个中文短标注；完成内部构思后必须使用 reference-locked image edit，不要只输出分析或 prompt。最终 PNG 必须保存到 /Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/，不要把工具默认输出目录当作最终交付路径。"
 policy:
   allow_implicit_invocation: true

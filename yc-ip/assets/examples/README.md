@@ -12,7 +12,7 @@
 
 ### 按 topic 选择 primary reference
 
-每次先读 `../../references/reference-routing.md`，再扫描本目录选择与主题、比例、情绪和信息密度相符的真实 asset。不要固定使用某一张图。`07-noise-filter.png` 仍是安全的单角色、白底、单场景机制图 fallback，但不是通用默认。
+每次先读 `../../references/reference-routing.md`，解释类图片再读 `../../references/explanation-variation.md`，再扫描本目录选择与主题、比例、情绪、信息密度和场景原型相符的真实 asset。不要固定使用某一张图。`07-noise-filter.png` 仍是安全的单角色、白底、单场景机制图 fallback，但不是通用默认。
 
 所有 reference 都只锁角色、渲染、留白和密度；必须为当前内容重新设计构图。`character-reference/` 九宫格只在角色连续两次漂移时作为第二张修复参考，不能作为普通 Sample 的唯一风格锁。
 

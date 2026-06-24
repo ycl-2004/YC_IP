@@ -35,7 +35,7 @@ Create a new scene for the requested topic. The output must be a fresh YC illust
 
 - 把 X 压成一个核心隐喻。
 - 先读 `concept-director.md`，写清“不是 A，而是 B”的机制判断。
-- 构图为一个连续场景：具体例子 → YC 操作 → 可见的中间结构 → 新输入 → 具体判断。
+- 先读 `explanation-variation.md` 选择场景原型，不要自动套机器。构图为一个连续场景：具体起点 → YC 操作 → 可见变化或结构 → 验证/回应/结果。
 - 标注默认 3-5 个中文短词；每个词都要推进因果，不要写装饰性口号。
 - 禁止百科页、课程卡片、定义段落、分类列表、真实案例列表、底部总结条。
 - 以上步骤在内部完成；随后立即调用本地 `imagegen` CLI/API edit。禁止只回复概念解释、画面方案或 final illustration prompt。
@@ -84,7 +84,7 @@ young adult male chibi character YC, short messy dark-red burgundy hair, round c
 
 当前 samples 风格。纯白底，温暖手绘 chibi，YC 参与核心动作，中文短标注，中等信息密度。默认文章配图、知识讲解、封面、社媒都先用这一档。参考 `assets/examples/simple/current-showcase/`。
 
-> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 操作一件低科技装置的连续手绘场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + 低科技装置，再填下面的变量。正式产物必须走 multi-image edit；只有 CLI/API 不可用时才使用 prompt-only fallback，并标记为未 reference locked。
+> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 亲手操作的连续手绘物理隐喻场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + `explanation-variation.md` 场景原型选择，再填下面的变量。正式产物必须走 multi-image edit；只有 CLI/API 不可用时才使用 prompt-only fallback，并标记为未 reference locked。
 
 ```text
 Input image 1 is only the blank output canvas. It is a pure white canvas for creating a new illustration. Do not treat it as style or content.
@@ -94,7 +94,7 @@ Input image 2 is the selected YC Sample / Standard primary reference (`{selected
 Generate one standalone {比例} YC illustration in the same SAMPLE / STANDARD style. Create a fresh scene for the requested topic; preserve only the reference's white canvas, single-character staging, pencil line quality, light coloring, sparse labels, and whitespace.
 
 Reframing rule (highest priority):
-Even if the topic is described as a "structure / architecture / explainer diagram", DO NOT draw a boxes-and-arrows architecture diagram, encoder/decoder blocks, a PPT infographic, or a formal flowchart. Reframe the structure into ONE continuous hand-drawn scene where YC physically operates a low-tech device (loom, sorter, press, bridge, conveyor, filter, weaving machine) that embodies the mechanism. Tokens/inputs enter on one side, YC works the device, a visible learned/processed structure forms inside it, and a new input exits as a concrete prediction/result.
+Even if the topic is described as a "structure / architecture / explainer diagram", DO NOT draw a boxes-and-arrows architecture diagram, encoder/decoder blocks, a PPT infographic, or a formal flowchart. Reframe the structure into ONE continuous hand-drawn physical metaphor scene where YC performs the action that makes the idea work. The scene may be a workbench device, bridge/path, sorter, one-source-many-outputs desk, feedback loop, human-AI relay, focused desk, protection umbrella, listening notebook, emotion-to-melody setup, or small-win scene. Use a machine only when internal transformation/filtering/prediction is truly the best metaphor.
 
 Visual DNA:
 STYLE IS THE HIGHEST PRIORITY; reduce content before violating it. PURE WHITE background (#FFFFFF) across the entire canvas, no cream paper tint, no full-page gray/off-white wash, no black or dark area, no paper texture, no gradient, no neon, no glow. Warm hand-drawn chibi illustration with slightly wobbly pencil-like sketch lines and light low-saturation coloring. EXACTLY ONE YC character, integrated into ONE continuous scene and performing the core action. No duplicate YC, no panels, no card grid, no numbered steps, no UI screens, no photoreal images. Medium information density: one clear visual metaphor, a few physical objects, 3-5 short handwritten Chinese labels, and 35%-45% empty white space.
@@ -111,6 +111,12 @@ Core idea:
 Mechanism statement:
 {用“不是 A，而是 B”写出概念真正怎样工作}
 
+Scene archetype:
+{从 explanation-variation.md 选择：工作台装置 / 桥路径 / 分拣收纳 / 一源多出 / 循环迭代 / 接力校准 / 桌面专注 / 保护边界 / 倾听采样 / 情绪转换 / 小胜利}
+
+Why this archetype:
+{一句话说明为什么这个场景比默认机器/箱子更适合；如果选择机器，也说明为什么必须展示内部转换}
+
 Cognitive action and physical verb:
 {分类/匹配/预测等一个认知动作} expressed as {倒入/摇动/分拣/织网/测试等可见物理动作}
 
@@ -118,10 +124,10 @@ Composition:
 {具体画面：YC 在哪里、正在做什么、核心物件/隐喻是什么、信息如何流动}
 
 Causal beats in one continuous scene (not panels):
-1. Examples: {2-3 组具体、可区分、必要时带答案的输入}
-2. Learning/processing: {YC 操作装置的明确动作}
-3. Learned structure: {装置内部或出口形成的网/筛/轨道/刻度/模板}
-4. Test and prediction: {一个新输入如何被结构判断，并得到什么具体结果}
+1. Starting evidence/input: {2-3 组具体、可区分的输入 / 声音 / 证据 / 干扰 / 原料}
+2. YC's core action: {YC 亲手做的明确动作；去掉 YC 后结果不能成立}
+3. Visible change/structure: {网/筛/轨道/刻度/模板/桥板/伞面/笔记/旋律线/反馈箱等}
+4. Causal proof: {一个新输入 / 回应 / 被保护的产出 / 小成果如何证明这个机制}
 
 Semantic micro-details:
 {只列 2-4 个能解释机制的细节；不要列装饰}
@@ -139,18 +145,19 @@ Color:
 YC's red hair is the main color anchor. Black line art, warm beige/gray object shading, orange for flow arrows or movement, red/pink for emphasis, blue only for system/AI/secondary notes.
 
 Constraints:
-One image explains one core mechanism, with enough semantic detail to make its causality visible. Use exactly one YC, one main device, 2-3 small hand-drawn input objects, one visible learned/processed structure, and one test input or concrete output when the concept needs them. Samples must be simple hand-drawn icons or objects, never photos, screens, cards grid, or a side UI column. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve 35%-45% blank space. Show only 3-5 short Chinese labels. No title banner, no definition paragraph, no speech-bubble paragraph, no type/category list, no bottom process strip, no summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart, no numbered steps, no dark background, no neon, no glow, no photoreal imagery. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the attached selected reference's style and restraint.
+One image explains one core mechanism, with enough semantic detail to make its causality visible. Use exactly one YC and one primary scene archetype. Use a main device only when it is the selected archetype; otherwise use the chosen bridge, loop, desk, umbrella, listening notebook, relay, melody, or small-win scene as the causal anchor. Include 2-3 small hand-drawn inputs/voices/evidence/interferences/materials, one visible change or structure, and one proof/result when the concept needs them. Samples must be simple hand-drawn icons or objects, never photos, screens, cards grid, or a side UI column. Every secondary object must explain the mechanism; remove decorative clutter. Keep the background pure white and preserve 35%-45% blank space. Show only 3-5 short Chinese labels. No title banner, no definition paragraph, no speech-bubble paragraph, no type/category list, no bottom process strip, no summary strip, no dense table, no heavy card borders, no section headers, no PPT infographic, no formal flowchart, no numbered steps, no dark background, no neon, no glow, no photoreal imagery. Keep all beats in one continuous hand-drawn scene, not separate panels. Do not use a full poster layout. Avoid repeating a wooden crank machine or box silhouette unless the topic requires internal transformation. Do not make it Minimal unless the user explicitly asked for Minimal/Sticker/贴图纸/贴纸. Do not make it Rich unless the user explicitly asked for Rich. Invent a fresh scene for this content while matching the attached selected reference's style and restraint.
 ```
 
 ### Broad Concept Explainer 构思法
 
 大概念不要画百科页。只画一个核心隐喻：
 1. 机制：先写“不是 A，而是 B”。
-2. 例子：输入要具体、可区分，必要时显示已有答案。
-3. 操作：YC 用一个可见物理动作驱动装置。
-4. 结构：画出学习/处理后留下的网、筛、轨道、刻度或模板。
-5. 验证：让一个新输入经过结构，得到具体结果。
-6. 标注：默认 3-5 个中文短词，只标因果节点；机制说明只用于构思，不写进图里。
+2. 原型：读 `explanation-variation.md`，先决定是装置、桥、循环、接力、桌面、保护、倾听、情绪转换还是小胜利。
+3. 例子：输入/声音/证据/干扰要具体、可区分。
+4. 操作：YC 用一个可见物理动作改变结果。
+5. 结构：画出学习/处理/保护/连接/归纳/转译后留下的可见变化。
+6. 验证：让一个新输入、回应、产出或小成果证明这个变化有用。
+7. 标注：默认 3-5 个中文短词，只标因果节点；机制说明只用于构思，不写进图里。
 
 例：「什么是 Machine Learning」→ 左侧苹果/香蕉/西瓜例子篮，中间 YC 流汗摇动“学习”曲柄，机器把颜色、形状、纹理织成“模型”规则网；右侧一个没标签的新水果落入网中，机器吐出“预测：苹果？”票据。标注从这些节点中选 3-5 个：`例子` / `学习` / `特征` / `模型` / `新问题` / `预测：苹果？`。
 
