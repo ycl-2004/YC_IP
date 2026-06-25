@@ -2,12 +2,12 @@
 
 ## 交付物闸门（最先检查）
 
-- [ ] 用户没有明确说“只分析 / 只要 prompt / 不要生成”时，本轮已经成功走本地 `imagegen` CLI/API edit 路线
-- [ ] 命令/API input images 里真实包含 blank canvas 和 canonical reference，不只是 prompt 里写了参考图
+- [ ] 用户没有明确说“只分析 / 只要 prompt / 不要生成”时，本轮已经成功走 Codex native `image_gen` 或用户明确选择的 CLI/API fallback
+- [ ] native route 的上下文里真实可见 canonical reference（必要时含 continuity anchor）；CLI/API fallback 的 input images 里真实包含 blank canvas 和 canonical reference；不只是 prompt 里写了参考图
 - [ ] 没有把概念解释、构图方案、短标注列表或 final illustration prompt 当作最终交付
-- [ ] 如果 CLI/API 失败并降级到 prompt-only `image_gen`，已明确标记 `style draft / 未 reference locked`，而不是冒充正式 YC locked asset
+- [ ] 如果只能产出无参考图的 prompt-only 草稿，已明确标记 `style draft / 未 reference locked`，而不是冒充正式 YC locked asset
 
-任何第一项失败都表示任务尚未完成：不要发送最终回复；先调用本地 `imagegen` CLI/API edit，或明确报告只能产出 fallback 草稿。
+任何第一项失败都表示任务尚未完成：不要发送最终回复；先调用 Codex native `image_gen`，或在用户明确选择后调用 CLI/API fallback。
 
 
 ## 交付报告闸门
@@ -15,11 +15,11 @@
 正式交付前必须报告：
 
 - `mode`: Sample / Standard、Minimal / Sticker、Rich 中的实际模式
-- `reference_image`: 实际传入 CLI/API 的参考图路径
-- `generation_route`: `API edit` / `prompt-only fallback`
+- `reference_image`: 实际进入生成上下文的参考图路径
+- `generation_route`: `Codex native image_gen` / `API edit fallback`
 - `output_path`: 最终图片路径
 
-如果 `generation_route = prompt-only fallback`，必须标记 `style draft / 未 reference locked`，不算正式 YC locked asset。
+如果只能产出 prompt-only 草稿，必须标记 `style draft / 未 reference locked`，不算正式 YC locked asset。
 
 最终 `output_path` 必须位于 `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/`。如果生成工具有默认临时输出目录，交付前必须先复制完成 PNG 到该目录。
 
@@ -29,7 +29,7 @@
 - [ ] YC 有透明/细框圆眼镜（不是黑框）
 - [ ] YC 参与了核心动作，不只是装饰
 - [ ] 比例符合用户需求
-- [ ] CLI/API 的 input images 里带了参考图，没有只写在 prompt 里，也没有照抄旧图的具体布局
+- [ ] 参考图真实进入生成上下文：native route 已通过 `view_image` / image attachment 载入；CLI/API fallback 的 input images 里带了参考图；没有只写在 prompt 里，也没有照抄旧图的具体布局
 
 角色识别失败（缺红发/眼镜）= 最高优先级，必须重生成：强调 `messy dark-red burgundy hair AND round clear-frame glasses — both mandatory`。
 
@@ -38,7 +38,7 @@
 ## Sample / Standard 默认模式专项
 
 - [ ] 背景是**纯白 #FFFFFF**，不要整张奶油白/米白纸底
-- [ ] 已读取 `reference-routing.md` 与 `assets/examples/README.md`；解释类图片还读取了 `explanation-variation.md`，并在 CLI/API input images 里实际附带与主题、比例、情绪和场景原型匹配的 primary reference；不是只在文字里说有参考图
+- [ ] 已读取 `reference-routing.md` 与 `assets/examples/README.md`；解释类图片还读取了 `explanation-variation.md`，并在生成上下文里实际附带与主题、比例、情绪和场景原型匹配的 primary reference；不是只在文字里说有参考图
 - [ ] 全图只有一个 YC，没有重复角色或多格里的多个 YC
 - [ ] 整体对齐 `assets/examples/simple/current-showcase/`：温暖手绘 chibi、中文短标注、中等信息密度
 - [ ] 方法/观点被画成场景物件或具体动作，不是线框流程图
@@ -104,7 +104,7 @@
 | 一圈道具/便利贴/书堆/大 logo | 删到只剩单角色 + 最多 1 物件 |
 | 出现英文或中英混排 | 重生成，只要 0-3 个中文短词 |
 | 出现多场景/箭头流程 | 那是 Sample，压回单主体 |
-| 没带参考图 | 用 CLI/API edit 补 `00-reference-sheet-watercolor` 作为真实 input image 重生成（最常见根因）|
+| 没带参考图 | native route 先用 `view_image` 载入 `00-reference-sheet-watercolor` 或 selected reference 后重生成；CLI fallback 才用 `--image` 补真实 input image |
 
 ---
 

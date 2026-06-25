@@ -2,9 +2,9 @@
 
 每张图单独生成，按内容替换 `{变量}`。**默认 Sample / Standard 成品风格**，对齐 `assets/examples/simple/current-showcase/`；只有用户明确点名 Minimal / Sticker / 贴图纸 / 贴纸 / 极简 / 最小贴纸时才用 Minimal；只有用户明确点名 Rich、完整海报、IP 设定页或品牌全景时才用 Rich。
 
-> **执行要求**：本文件中的构思和 prompt 是给本地 `imagegen` CLI/API edit 使用的内部材料。除非用户明确要求只要 prompt 或不要生成，否则写完 prompt 后必须立即调用 CLI/API，不能把 prompt 当作最终交付。当前聊天内置的 prompt-only `image_gen` 只能作为 fallback 草稿路线。
+> **执行要求**：本文件中的构思和 prompt 是给 Codex native `image_gen` 或用户明确选择的 CLI/API fallback 使用的内部材料。除非用户明确要求只要 prompt 或不要生成，否则写完 prompt 后必须立即调用 Codex native `image_gen`，不能把 prompt 当作最终交付。`OPENAI_API_KEY` 只属于 CLI/API fallback，不是 Codex 默认路线的前置条件。
 
-> ⚠️ **正式生图必须用 CLI/API 传入参考图**，纯文字 prompt 会回退到"全彩 anime + 满版拼贴"的海报先验。先读 `reference-routing.md` 与 `assets/examples/README.md`，扫描 topic-matched assets 后传入一张 primary reference。
+> ⚠️ **正式生图必须让参考图真实进入生成上下文**，纯文字 prompt 会回退到"全彩 anime + 满版拼贴"的海报先验。Codex native route 先用 `view_image` / image attachment 载入 selected primary reference，再调用 built-in `image_gen`；CLI/API fallback 才使用 `--image`。先读 `reference-routing.md` 与 `assets/examples/README.md`，扫描 topic-matched assets 后选择一张 primary reference。
 > - Sample / Standard → 根据主题、比例、情绪与信息密度选择 `assets/examples/simple/current-showcase/` 或 `simple/` 中最贴切的真实 asset；`07-noise-filter.png` 只在没有更贴切主题图时作为机制图 fallback。
 > - Minimal / Sticker（仅显式点名）→ 带 `assets/examples/sticker/00-reference-sheet-watercolor.png`。
 > - 长相锁（红发眼镜不稳时加）→ `assets/examples/character-reference/` 九宫格。注意它是全彩 anime，只能锁长相；Minimal 要 00 + 九宫格两张一起带。
@@ -15,9 +15,9 @@
 
 参考图只锁"长相+画风+密度"，**不照抄构图**，每次从当前内容重想画面。`reference-routing.md` 决定哪个 example 是 primary reference；不要因为方便而固定使用同一张。`sticker/01-08` 是 Minimal 动作姿势库，`sticker/outfit-0x` 是服装变体——都只作构思参考，不当默认画风锁。
 
-## Multi-Image Edit Prompt Block（CLI/API 专用）
+## Reference Context Prompt Block（Codex native + CLI/API fallback 共用）
 
-正式生成时，把这段放在 prompt 开头：
+正式生成时，把这段放在 prompt 开头。Codex native route 中，Image 2 指已经通过 `view_image` / image attachment 进入上下文的 selected reference；CLI/API fallback 中，Image 2 指 `--image <canonical-reference>`：
 
 ```text
 Input image 1 is only the blank output canvas. It is a pure white canvas for creating a new illustration. Do not treat it as style or content.
@@ -27,7 +27,7 @@ Input image 2 is the canonical YC reference for this mode. Use image 2 only for 
 Create a new scene for the requested topic. The output must be a fresh YC illustration, not an edit or copy of the reference image's composition, objects, layout, or story.
 ```
 
-正式命令必须使用 `image_gen.py edit --image <blank-canvas> --image <canonical-reference> ...`。如果只能走 prompt-only `image_gen`，必须在交付时标记 `style draft / 未 reference locked`。
+Codex native route 必须先让 selected reference 在上下文中可见，再调用 built-in `image_gen`。只有用户明确选择 CLI/API fallback，或 native route 不可用时，才使用 `image_gen.py edit --image <blank-canvas> --image <canonical-reference> ...`。如果只能走无参考图的 prompt-only 草稿，必须在交付时标记 `style draft / 未 reference locked`。
 
 ## 短 prompt 路由
 
@@ -38,7 +38,7 @@ Create a new scene for the requested topic. The output must be a fresh YC illust
 - 先读 `explanation-variation.md` 选择场景原型，不要自动套机器。构图为一个连续场景：具体起点 → YC 操作 → 可见变化或结构 → 验证/回应/结果。
 - 标注默认 3-5 个中文短词；每个词都要推进因果，不要写装饰性口号。
 - 禁止百科页、课程卡片、定义段落、分类列表、真实案例列表、底部总结条。
-- 以上步骤在内部完成；随后立即调用本地 `imagegen` CLI/API edit。禁止只回复概念解释、画面方案或 final illustration prompt。
+- 以上步骤在内部完成；随后立即调用 Codex native `image_gen`。禁止只回复概念解释、画面方案或 final illustration prompt。
 
 ---
 
@@ -84,7 +84,7 @@ young adult male chibi character YC, short messy dark-red burgundy hair, round c
 
 当前 samples 风格。纯白底，温暖手绘 chibi，YC 参与核心动作，中文短标注，中等信息密度。默认文章配图、知识讲解、封面、社媒都先用这一档。参考 `assets/examples/simple/current-showcase/`。
 
-> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 亲手操作的连续手绘物理隐喻场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + `explanation-variation.md` 场景原型选择，再填下面的变量。正式产物必须走 multi-image edit；只有 CLI/API 不可用时才使用 prompt-only fallback，并标记为未 reference locked。
+> **填写前先确认改写铁律**：哪怕主题是"结构图/架构图/解释图/diagram"，输出必须是 YC 亲手操作的连续手绘物理隐喻场景，**绝不是方框+箭头的论文式架构图**。先在脑内完成"不是 A 而是 B"机制判断 + 物理动词 + `explanation-variation.md` 场景原型选择，再填下面的变量。正式产物默认走 Codex native image route；CLI/API 仅为 fallback。无参考图草稿必须标记为未 reference locked。
 
 ```text
 Input image 1 is only the blank output canvas. It is a pure white canvas for creating a new illustration. Do not treat it as style or content.
