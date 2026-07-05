@@ -126,7 +126,7 @@ python /Users/yichenlin/.codex/skills/imagegen/scripts/image_gen.py edit \
   --size <1536x1024|1024x1024|1024x1536> \
   --quality high \
   --input-fidelity high \
-  --out "/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/YYYY-MM-DD-<content-slug>-<topic-name>.png"
+  --out "/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/<posts/YYYY-MM-DD-<content-slug>|illustrations>/<图名>.png"   # 归档位置见「5. 保存」
 ```
 
 `<blank-canvas.png>` 是纯白输出画布，只用来承载新画面；`<canonical-reference.png>` 才是风格/IP reference。不要只把参考图当第一张 input，否则模型容易复制旧图构图。空白画布可用任意本地图片工具生成，尺寸必须和目标 `--size` 一致。
@@ -152,13 +152,19 @@ Sample 的方法类图要把“方法”变成画面里的场景物件或情境�
 
 ### 5. 保存
 
-所有最终 YC 图片统一保存到：
+所有最终 YC 图片统一归档到 `YC_Img_Out/`，按是否挂发布内容分两个位置：
 
 ```
-/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/YYYY-MM-DD-<content-slug>-<topic-name>.png
+# 挂某条发布内容（有明确选题/slug，与 YC_Media 选题库、YC_Content/<slug>/ 一致）：
+/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/posts/YYYY-MM-DD-<content-slug>/<topic-name>.png
+
+# 单张配图 / 风格试验（暂不挂内容）：
+/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/illustrations/YYYY-MM-DD-<topic-name>.png
 ```
 
-Codex native `image_gen` 会先写入 `$CODEX_HOME/generated_images/...`。必须在交付前把完成的 PNG 原样复制到 `YC_Img_Out/`，并把副本作为唯一 final output path 报告；不得把工具默认输出目录当作最终交付路径。CLI/API fallback 生成时也必须直接或最终归档到同一目录。
+拿不准挂不挂内容时默认 `illustrations/`；之后被内容采用再复制进对应 `posts/` 文件夹（原件留档）。
+
+Codex native `image_gen` 会先写入 `$CODEX_HOME/generated_images/...`。必须在交付前把完成的 PNG 原样复制到 `YC_Img_Out/` 对应子目录，并把副本作为唯一 final output path 报告；不得把工具默认输出目录当作最终交付路径。CLI/API fallback 生成时也必须直接或最终归档到同一目录。
 
 ## 输出口径
 

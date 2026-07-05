@@ -116,7 +116,7 @@ Broad Concept 不要固定使用 `05-concept-explainer.png`、`07-noise-filter.p
 
 - 指定比例的 YC IP 配图（支持 8 种比例）
 - 文章/内容的 shot list（每张图的主题、模式、YC 动作、标注建议）
-- 最终 PNG，统一保存到 `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/`
+- 最终 PNG，统一归档到 `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/`：挂发布内容 → `posts/YYYY-MM-DD-<content-slug>/`；单张配图 → `illustrations/`
 
 **支持的图片比例：**
 
@@ -243,7 +243,7 @@ Use $yc-ip 生成一张 16:9 的 YC IP 介绍图，展示 YC 是谁、关注什�
 4. 读取 `yc-ip/references/reference-routing.md`；解释类再读 `yc-ip/references/explanation-variation.md`，扫描 examples 后取 topic-matched primary reference；`07-noise-filter.png` 仅作 fallback
 5. 每张图单独调用图像模型生成（带参考图）
 6. 先过 `references/style-gate.md`：白底、一个 YC、单场景、无海报/UI/长文；失败自动重生成。再做角色和密度 QA
-7. 保存 PNG 到 `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/`，报告用途、模式和最终路径
+7. 保存 PNG 到 `YC_Img_Out/posts/<slug>/`（挂内容）或 `YC_Img_Out/illustrations/`（单张），报告用途、模式和最终路径
 
 ---
 
