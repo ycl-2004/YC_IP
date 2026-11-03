@@ -5,7 +5,7 @@ This file is the source of truth for selecting real YC image references. Read it
 ## Non-negotiable workflow
 
 1. Classify the request by mode, deliverable ratio, topic, and emotional tone.
-2. Scan the corresponding real assets under `assets/examples/`. When working from the source repo, also scan `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_IP/examples/images/`; these are the same canonical Sample showcase assets and can be used to reason about scene language.
+2. Scan the corresponding real assets under `assets/examples/`. When working from the source repo, also scan `/Users/yichenlin/Desktop/YC/Personal IP/YC_IP/examples/images/`; these are the same canonical Sample showcase assets and can be used to reason about scene language.
 3. Choose the closest **primary reference** and pass it as an actual image input to the image-generation or edit route. A text prompt that merely names an asset is not compliant.
 4. Add at most one **secondary reference** only when it solves a separate need: a specific approved pose, outfit, or a character-identity correction. Do not stack references for decoration.
 5. Use the references for YC identity, line quality, palette restraint, whitespace, and information density. Build a new scene; never copy the reference composition.

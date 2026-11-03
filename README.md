@@ -116,7 +116,7 @@ Broad Concept 不要固定使用 `05-concept-explainer.png`、`07-noise-filter.p
 
 - 指定比例的 YC IP 配图（支持 8 种比例）
 - 文章/内容的 shot list（每张图的主题、模式、YC 动作、标注建议）
-- 最终 PNG，统一归档到 `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/`：挂发布内容 → `posts/YYYY-MM-DD-<content-slug>/`；单张配图 → `illustrations/`
+- 最终 PNG，统一归档到 `/Users/yichenlin/Desktop/YC/Personal IP/YC_Img_Out/`：挂发布内容 → `posts/YYYY-MM-DD-<content-slug>/`；单张配图 → `illustrations/`
 
 **支持的图片比例：**
 

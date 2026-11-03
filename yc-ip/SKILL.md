@@ -80,6 +80,23 @@ YC 角色：男性，深红凌乱短发 + 圆框透明眼镜 + chibi 比例。**
 
 默认：**文章配图 `16:9`，社媒单图 `1:1`**。其余（`9:16` `4:3` `3:2` `2:3` `5:4` `21:9`）只在用户明确点名时用，不要每次都让用户选。
 
+## 透明背景交付契约（2026-07-26 立：仅 yc-design 落版时默认透明）
+
+**生成一律用纯白底**（画风与生成质量需要）。是否去背景取决于用途：
+
+- **单独调用 yc-ip**（文章配图、社媒单图、知识讲解、风格试验等独立出图）：**默认交付纯白底原图，不做透明处理**；只有用户明确要求透明/去背景时才做。
+- **图片要进 yc-design 落版**（Cards / Cover / 长页 / Slides 等 HTML 成品），或本次任务同时在跑 yc-design：**默认另做透明 presentation derivative 并作为落版版本**，用户不需要每次追加「去背景」。
+
+**触发条件怎么判断**：调用方（yc-design 或用户）在请求里写了「用于 yc-design <scene> 落版」「贴进卡片/封面/长页」这类话，就走透明路径；只说「做一张 X 的图」「解释 X」则是单独出图，保持白底。拿不准时按单独出图处理，并在交付里问一句是否需要透明版——白底可以补做透明，反过来重生成更贵。
+
+做透明 derivative 时的规则：
+
+1. **双资产**：不透明原图保留为 source master（不覆盖、不删除）；透明 derivative 在它旁边生成。
+2. **去底方法**：`python3 "/Users/yichenlin/Desktop/YC/Personal IP/YC_Design/scripts/sticker-cutout.py" --standard <opaque-master.png> <transparent-out.png>`——只移除与画布边缘相连的白底，二值 alpha，不改 RGB。禁止 luminance-to-alpha、禁止用亮度重算颜色。
+3. **双底目检**：透明版必须在浅色底和深色底各合成检查一次：无白色矩形/白边、红发与肤色未被洗淡、无内部白色被误抠、发丝无色边。
+4. **例外条款**：内部白被误抠、发丝色边修不掉、或画面本来需要纸面/白色装置时，改用不透明原图落版，并在交付说明与 yc-design 的 `data-yc-ip-background="intentional-opaque"` 里写明原因。
+5. **归档**：master 与透明 derivative 都进 `YC_Img_Out/` 对应目录（master 命名加 `-source` 后缀或放 `ip-reference/` 语义位置）；yc-design 落版时按其规则在 `ip-manifest.json` 登记 `sample-standard-cutout` + `transparent:true`。
+
 ## 先读这些参考
 
 **所有实际生图先读四个文件**（角色关键词已并进模板，别一次塞满上下文）：
@@ -126,7 +143,7 @@ python /Users/yichenlin/.codex/skills/imagegen/scripts/image_gen.py edit \
   --size <1536x1024|1024x1024|1024x1536> \
   --quality high \
   --input-fidelity high \
-  --out "/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/<posts/YYYY-MM-DD-<content-slug>|illustrations>/<图名>.png"   # 归档位置见「5. 保存」
+  --out "/Users/yichenlin/Desktop/YC/Personal IP/YC_Img_Out/<posts/YYYY-MM-DD-<content-slug>|illustrations>/<图名>.png"   # 归档位置见「5. 保存」
 ```
 
 `<blank-canvas.png>` 是纯白输出画布，只用来承载新画面；`<canonical-reference.png>` 才是风格/IP reference。不要只把参考图当第一张 input，否则模型容易复制旧图构图。空白画布可用任意本地图片工具生成，尺寸必须和目标 `--size` 一致。
@@ -143,7 +160,7 @@ Sample 的方法类图要把“方法”变成画面里的场景物件或情境�
 
 ### 4. 检查与迭代
 
-先过 `style-gate.md` 的视觉 Pass / Fail，再过 `qa-checklist.md`。Sample 出现任一硬失败信号时，不交付，自动重生成，最多 2 次。常见问题：
+先过 `style-gate.md` 的视觉 Pass / Fail，再过 `qa-checklist.md`；若图片要进 yc-design 落版（或用户点名要透明），再按「透明背景交付契约」生成透明 derivative 并完成浅/深底双检。Sample 出现任一硬失败信号时，不交付，自动重生成，最多 2 次。常见问题：
 - YC 没红发/眼镜 → 角色失败，重生成
 - Sample：背景不是纯白、方法没有变成场景物件、YC 没参与核心动作、太像 PPT/信息图 → 重生成或补回
 - Minimal：只有显式点名才可用；若没点名却生成得过轻，升回 Sample
@@ -155,11 +172,11 @@ Sample 的方法类图要把“方法”变成画面里的场景物件或情境�
 所有最终 YC 图片统一归档到 `YC_Img_Out/`，按是否挂发布内容分两个位置：
 
 ```
-# 挂某条发布内容（有明确选题/slug，与 YC_Media 选题库、YC_Content/<slug>/ 一致）：
-/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/posts/YYYY-MM-DD-<content-slug>/<topic-name>.png
+# 挂某条发布内容（有明确选题/slug，与 YC_Content/<slug>/ 一致）：
+/Users/yichenlin/Desktop/YC/Personal IP/YC_Img_Out/posts/YYYY-MM-DD-<content-slug>/<topic-name>.png
 
 # 单张配图 / 风格试验（暂不挂内容）：
-/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/illustrations/YYYY-MM-DD-<topic-name>.png
+/Users/yichenlin/Desktop/YC/Personal IP/YC_Img_Out/illustrations/YYYY-MM-DD-<topic-name>.png
 ```
 
 拿不准挂不挂内容时默认 `illustrations/`；之后被内容采用再复制进对应 `posts/` 文件夹（原件留档）。
@@ -170,11 +187,12 @@ Codex native `image_gen` 会先写入 `$CODEX_HOME/generated_images/...`。必�
 
 默认先生成再交付。策略输出仅用于用户明确要求的只分析模式。图片生成成功后，交付含：生成张数、每张用途、保存路径、哪张最稳；不要再附上大段概念分析或完整 prompt，让图说话。
 
-正式交付前必须报告生成闸门四项：
+正式交付前必须报告生成闸门五项：
 
 - `mode`: Sample / Standard、Minimal / Sticker、Rich 中的实际模式
 - `reference_image`: 实际进入生成上下文的参考图路径
 - `generation_route`: `Codex native image_gen` / `API edit fallback`
-- `output_path`: 最终图片路径
+- `output_path`: 最终图片路径（供 yc-design 落版时指向透明 derivative，master 路径一并列出；单独出图指向白底原图）
+- `transparent`: false（单独出图默认，白底属正常交付）/ true（yc-design 落版或用户点名透明）；落版触发例外条款时写 false + 原因
 
 如果只能产出无参考图的 prompt-only 草稿，必须标记为 `style draft / 未 reference locked`，不算正式 YC locked asset。

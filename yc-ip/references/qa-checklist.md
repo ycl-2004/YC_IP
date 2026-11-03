@@ -21,7 +21,7 @@
 
 如果只能产出 prompt-only 草稿，必须标记 `style draft / 未 reference locked`，不算正式 YC locked asset。
 
-最终 `output_path` 必须位于 `/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/`。如果生成工具有默认临时输出目录，交付前必须先复制完成 PNG 到该目录。
+最终 `output_path` 必须位于 `/Users/yichenlin/Desktop/YC/Personal IP/YC_Img_Out/`。如果生成工具有默认临时输出目录，交付前必须先复制完成 PNG 到该目录。
 
 ## 通用必过项（三模式都要）
 - [ ] YC 是男性，具有短乱酒红发和温和男性面部特征

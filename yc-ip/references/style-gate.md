@@ -29,7 +29,7 @@ python /Users/yichenlin/.codex/skills/imagegen/scripts/image_gen.py edit \
   --size <1536x1024|1024x1024|1024x1536> \
   --quality high \
   --input-fidelity high \
-  --out "/Users/yichenlin/Desktop/AI Agent/Personal IP/YC_Img_Out/YYYY-MM-DD-<content-slug>-<topic-name>.png"
+  --out "/Users/yichenlin/Desktop/YC/Personal IP/YC_Img_Out/YYYY-MM-DD-<content-slug>-<topic-name>.png"
 ```
 
 Native route 下，selected primary reference 必须通过 `view_image` 或 Codex image attachment 进入上下文，只锁角色身份、线条、白底、克制配色、信息密度和手写中文标注风格。prompt 必须明确禁止复制该参考图的原始构图。CLI/API fallback 下，Input image 1 是纯白 blank canvas，Input image 2 是 selected primary reference。
